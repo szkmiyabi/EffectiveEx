@@ -18,6 +18,7 @@ namespace EffectiveEx
         XLWorkbook currentWb;
         IXLWorksheet currentWs;
 
+        //コンストラクタ
         public Form1()
         {
             InitializeComponent();
@@ -28,8 +29,6 @@ namespace EffectiveEx
             sheetNameCombo.Enabled = false;
             columnValues.Text = "1";
             skipRowNumbers.Text = "1";
-            searchValues.Text = "ifi2001\r\nifi2002\r\nifi2003";
-
             saveDirPath = getUserHomePath() + @"\Desktop\";
             outputDirectory.Text = saveDirPath;
         }
