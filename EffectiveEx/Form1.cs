@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,16 @@ namespace EffectiveEx
 {
     public partial class Form1 : Form
     {
+        string currentWbPath;
+        string diffWbPath;
+        string outputWbPath;
+        string saveDirPath;
+        XLWorkbook currentWb;
+        XLWorkbook diffWb;
+        XLWorkbook outputWb;
+        IXLWorksheet currentWs;
+        IXLWorksheet diffWs;
+
         public Form1()
         {
             InitializeComponent();
