@@ -30,41 +30,18 @@ namespace EffectiveEx
             return path;
         }
 
-        //保存ファイルパス取得
-        private string getSavePath(string extension)
-        {
-            string path = "";
-            SaveFileDialog sfd = new SaveFileDialog();
-            switch (extension)
-            {
-                case "xlsx":
-                    sfd.Filter = "Excelワークブック(*.xlsx)|*.xlsx";
-                    break;
-                default:
-                    sfd.Filter = "すべてのファイル(*.*)|*.*";
-                    break;
-            }
-            if (!saveDirPath.Equals("")) sfd.InitialDirectory = saveDirPath;
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                path = sfd.FileName;
-            }
-            return path;
-        }
-
         //出力フォルダパスを選択
-        private string getSaveFolderName()
+        private void setOutputPath()
         {
-            string dirname = "";
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.Description = "保存先のフォルダを選択";
             fbd.SelectedPath = getUserHomePath() + @"\Desktop";
             fbd.ShowNewFolderButton = true;
             if (fbd.ShowDialog() == DialogResult.OK)
             {
-                dirname = fbd.SelectedPath + @"\";
+                saveDirPath = fbd.SelectedPath + @"\";
+                outputDirectory.Text = saveDirPath;
             }
-            return dirname;
         }
 
         //ユーザのホームフォルダパス取得

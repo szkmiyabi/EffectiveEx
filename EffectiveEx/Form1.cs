@@ -14,34 +14,30 @@ namespace EffectiveEx
     public partial class Form1 : Form
     {
         string currentWbPath;
-        string outputWbPath;
         string saveDirPath;
         XLWorkbook currentWb;
-        XLWorkbook outputWb;
         IXLWorksheet currentWs;
 
         public Form1()
         {
             InitializeComponent();
             currentWbPath = "";
-            outputWbPath = "";
             currentWb = null;
-            outputWb = null;
             currentWs = null;
 
             sheetNameCombo.Enabled = false;
+            columnValues.Text = "1";
+            skipRowNumbers.Text = "1";
+            searchValues.Text = "ifi2001\r\nifi2002\r\nifi2003";
 
-            saveDirPath = getUserHomePath() + @"\Desktop";
+            saveDirPath = getUserHomePath() + @"\Desktop\";
             outputDirectory.Text = saveDirPath;
         }
 
         //出力先参照ボタンクリック
         private void browseOutputDirectoryButton_Click(object sender, EventArgs e)
         {
-            string dir = getSaveFolderName();
-            if (dir.Equals("")) return;
-            saveDirPath = dir;
-            outputDirectory.Text = dir;
+            setOutputPath();
         }
 
         //開くボタンクリック
@@ -55,6 +51,12 @@ namespace EffectiveEx
             currentWbPath = path;
             statusText.Text = path;
             initTargetWorksheetCombo();
+        }
+
+        //行削除
+        private void deleteRowButton_Click(object sender, EventArgs e)
+        {
+            deleteRowByCondition();
         }
     }
 }
