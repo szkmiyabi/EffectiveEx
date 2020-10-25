@@ -41,18 +41,18 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.searchValues = new System.Windows.Forms.TextBox();
-            this.statusBarControl = new System.Windows.Forms.StatusStrip();
-            this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.outputDirectory = new System.Windows.Forms.TextBox();
             this.browseOutputDirectoryButton = new System.Windows.Forms.Button();
+            this.statusBarControl = new System.Windows.Forms.StatusStrip();
+            this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            this.statusBarControl.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
+            this.statusBarControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -92,6 +92,7 @@
             this.openButton.TabIndex = 1;
             this.openButton.Text = "開く";
             this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // deleteRowButton
             // 
@@ -183,23 +184,6 @@
             this.searchValues.Size = new System.Drawing.Size(196, 97);
             this.searchValues.TabIndex = 1;
             // 
-            // statusBarControl
-            // 
-            this.statusBarControl.ImageScalingSize = new System.Drawing.Size(17, 17);
-            this.statusBarControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusText});
-            this.statusBarControl.Location = new System.Drawing.Point(0, 376);
-            this.statusBarControl.Name = "statusBarControl";
-            this.statusBarControl.Size = new System.Drawing.Size(501, 22);
-            this.statusBarControl.TabIndex = 1;
-            this.statusBarControl.Text = "statusStrip1";
-            // 
-            // statusText
-            // 
-            this.statusText.Name = "statusText";
-            this.statusText.Size = new System.Drawing.Size(167, 17);
-            this.statusText.Text = "Excelファイルを選択してください";
-            // 
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.Controls.Add(this.label1);
@@ -235,6 +219,24 @@
             this.browseOutputDirectoryButton.TabIndex = 2;
             this.browseOutputDirectoryButton.Text = "...";
             this.browseOutputDirectoryButton.UseVisualStyleBackColor = true;
+            this.browseOutputDirectoryButton.Click += new System.EventHandler(this.browseOutputDirectoryButton_Click);
+            // 
+            // statusBarControl
+            // 
+            this.statusBarControl.ImageScalingSize = new System.Drawing.Size(17, 17);
+            this.statusBarControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusText});
+            this.statusBarControl.Location = new System.Drawing.Point(0, 376);
+            this.statusBarControl.Name = "statusBarControl";
+            this.statusBarControl.Size = new System.Drawing.Size(501, 22);
+            this.statusBarControl.TabIndex = 1;
+            this.statusBarControl.Text = "statusStrip1";
+            // 
+            // statusText
+            // 
+            this.statusText.Name = "statusText";
+            this.statusText.Size = new System.Drawing.Size(167, 17);
+            this.statusText.Text = "Excelファイルを選択してください";
             // 
             // Form1
             // 
@@ -252,10 +254,10 @@
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
-            this.statusBarControl.ResumeLayout(false);
-            this.statusBarControl.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
+            this.statusBarControl.ResumeLayout(false);
+            this.statusBarControl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -29,8 +29,32 @@ namespace EffectiveEx
             outputWb = null;
             currentWs = null;
 
+            sheetNameCombo.Enabled = false;
+
             saveDirPath = getUserHomePath() + @"\Desktop";
             outputDirectory.Text = saveDirPath;
+        }
+
+        //出力先参照ボタンクリック
+        private void browseOutputDirectoryButton_Click(object sender, EventArgs e)
+        {
+            string dir = getSaveFolderName();
+            if (dir.Equals("")) return;
+            saveDirPath = dir;
+            outputDirectory.Text = dir;
+        }
+
+        //開くボタンクリック
+        private void openButton_Click(object sender, EventArgs e)
+        {
+            statusText.Text = "";
+            currentWbPath = "";
+            currentWb = null;
+            string path = getLoadPath("xlsx");
+            if (path.Equals("")) return;
+            currentWbPath = path;
+            statusText.Text = path;
+            initTargetWorksheetCombo();
         }
     }
 }

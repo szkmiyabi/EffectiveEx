@@ -64,6 +64,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Excel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Files.cs">
       <SubType>Form</SubType>
     </Compile>
