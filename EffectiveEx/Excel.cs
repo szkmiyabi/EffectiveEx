@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace EffectiveEx
 {
@@ -86,16 +87,19 @@ namespace EffectiveEx
         //条件に一致する行数取得（スキップ行数は含まない）
         private int getHitsRowCount()
         {
+            //カウンタ
             int cnt = 0;
+
             List<string> vals = getSearchValues();
             int icx = Int32.Parse(columnValues.Text);
             int skip_nm = Int32.Parse(skipRowNumbers.Text);
             int r = getStartRow();
             int rx = getEndRow();
-            for (int i = r; i <= rx; i++)
-            {
-                if (skip_nm == i) continue;
+            int start_nm = r + skip_nm;
 
+            for (int i = start_nm; i <= rx; i++)
+            {
+                //条件判定のためのデータ取り出し処理
                 var chk_val = currentWs.Cell(i, icx).Value;
                 Type chk_t = currentWs.Cell(i, icx).Value.GetType();
                 if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
@@ -116,6 +120,7 @@ namespace EffectiveEx
                     chk_val = (string)chk_val;
                 }
 
+                //条件に一致したらカウンタをインクリメント
                 if (isMatchRow(vals, (string)chk_val))
                 {
                     cnt++;
@@ -129,9 +134,12 @@ namespace EffectiveEx
         {
             List<string> vals = getSearchValues();
             int icx = Int32.Parse(columnValues.Text);
-            int skip_nm = Int32.Parse(skipRowNumbers.Text); int start_nm = 1 + skip_nm;
+            int skip_nm = Int32.Parse(skipRowNumbers.Text);
+            int start_nm = 1 + skip_nm;
+
             for(int i=start_nm; i<=getEndRow(); i++)
             {
+                //条件判定のためのデータ取り出し処理
                 var chk_val = currentWs.Cell(i, icx).Value;
                 Type chk_t = currentWs.Cell(i, icx).Value.GetType();
                 if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
@@ -152,6 +160,7 @@ namespace EffectiveEx
                     chk_val = (string)chk_val;
                 }
 
+                //条件に一致しない時に削除実行し関数を抜ける（削除の度に全体データ範囲行数が減ってしまうため）
                 if (!isMatchRow(vals, (string)chk_val))
                 {
                     writeLog("行を削除しました");
@@ -164,15 +173,33 @@ namespace EffectiveEx
         //行削除のラッパー関数
         private void deleteRowByCondition()
         {
-            if (sheetNameCombo.Text == "" || columnValues.Text == "") return;
-            initCurrentWorksheet(sheetNameCombo.Text);
-            while(getEndRow() != (getHitsRowCount() + 1))
+            if (sheetNameCombo.Text == "" || columnValues.Text == "" || skipRowNumbers.Text == "" || searchValues.Text == "")
             {
+                MessageBox.Show("シート名あるいは列番号あるいはスキップ行数あるいは検索条件が入力されていません");
+                return;
+            }
+
+            //コンボ選択値をアクティブシートにする
+            initCurrentWorksheet(sheetNameCombo.Text);
+
+            int skip_nm = Int32.Parse(skipRowNumbers.Text);
+
+            //残す行数＋スキップ行数を取得
+            int during = getHitsRowCount() + skip_nm;
+
+            //データ範囲行数が残す行数＋スキップ行数に達するまでループ
+            while(getEndRow() != during)
+            {
+                //ひたすら行を削除する
                 deleteRow();
             }
+
+            //保存の段取り
             string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
             string ext = Path.GetExtension(currentWbPath);
             string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
+
+            //別名保存
             currentWb.SaveAs(new_savepath);
             writeLog("処理が完了しました。出力ファイル：" + new_savepath);
         }
