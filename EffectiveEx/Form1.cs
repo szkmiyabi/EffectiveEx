@@ -29,6 +29,7 @@ namespace EffectiveEx
             sheetNameCombo.Enabled = false;
             columnValues.Text = "1";
             skipRowNumbers.Text = "1";
+            withoutConditionColNum.Text = "1";
             saveDirPath = getUserHomePath() + @"\Desktop\";
             outputDirectory.Text = saveDirPath;
         }
@@ -56,6 +57,18 @@ namespace EffectiveEx
         private void deleteRowButton_Click(object sender, EventArgs e)
         {
             deleteRowByCondition();
+        }
+
+        //値集計検索
+        private void searchValsResultButton_Click(object sender, EventArgs e)
+        {
+            searchValsResult();
+        }
+
+        //クリア
+        private void reportClearButton_Click(object sender, EventArgs e)
+        {
+            reportText.Clear();
         }
     }
 }

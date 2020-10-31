@@ -11,6 +11,8 @@ namespace EffectiveEx
 {
     partial class Form1
     {
+        Dictionary<string, int> dict = null;
+
         //カレントWorkbookをセット
         private void initCurrentBook()
         {
@@ -203,5 +205,115 @@ namespace EffectiveEx
             currentWb.SaveAs(new_savepath);
             writeLog("処理が完了しました。出力ファイル：" + new_savepath);
         }
+
+        //キー存在判定
+        private Boolean isExistsKey(string key)
+        {
+            Boolean flg = false;
+            foreach(string str in dict.Keys)
+            {
+                if (str == key) flg = true;
+            }
+            return flg;
+        }
+
+        //辞書を生成
+        private void adjustDictionary(string key)
+        {
+            if(dict.Count == 0)
+            {
+                dict.Add(key, 1);
+            }
+            else if (!isExistsKey(key))
+            {
+                dict.Add(key, 1);
+            }
+            else if (isExistsKey(key))
+            {
+                int val = (int)dict[key];
+                val++;
+                dict[key] = val;
+            }
+        }
+
+        //値検索集計
+        private void searchValsResult()
+        {
+            if (sheetNameCombo.Text == "" || columnValues.Text == "" || skipRowNumbers.Text == "")
+            {
+                MessageBox.Show("シート名あるいは列番号あるいはスキップ行数あるいは検索条件が入力されていません");
+                return;
+            }
+
+            //コンボ選択値をアクティブシートにする
+            initCurrentWorksheet(sheetNameCombo.Text);
+
+            dict = new Dictionary<string, int>();
+            List<string> vals = getSearchValues();
+            int icx = Int32.Parse(columnValues.Text);
+            int skip_nm = Int32.Parse(skipRowNumbers.Text);
+            int r = getStartRow();
+            int rx = getEndRow();
+            int start_nm = r + skip_nm;
+
+            for (int i = start_nm; i <= rx; i++)
+            {
+                //条件判定のためのデータ取り出し処理
+                var chk_val = currentWs.Cell(i, icx).Value;
+                Type chk_t = currentWs.Cell(i, icx).Value.GetType();
+                if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
+                {
+                    chk_val = chk_val.ToString();
+                }
+                else if (chk_t.Equals(typeof(DateTime)))
+                {
+                    chk_val = chk_val.ToString();
+                }
+                else if (chk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
+                {
+                    chk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
+                    chk_val = chk_val.ToString();
+                }
+                else
+                {
+                    chk_val = (string)chk_val;
+                }
+
+                if ((searchValResutWithoutCheck.Checked == true))
+                {
+                    int without_cond_col = Int32.Parse(withoutConditionColNum.Text);
+                    var inchk_val = currentWs.Cell(i, without_cond_col).Value;
+                    Type inchk_t = currentWs.Cell(i, without_cond_col).Value.GetType();
+                    if (inchk_t.Equals(typeof(double)) || inchk_t.Equals(typeof(int)) || inchk_t.Equals(typeof(float)))
+                    {
+                        inchk_val = inchk_val.ToString();
+                    }
+                    else if (inchk_t.Equals(typeof(DateTime)))
+                    {
+                        inchk_val = inchk_val.ToString();
+                    }
+                    else if (inchk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
+                    {
+                        inchk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
+                        inchk_val = chk_val.ToString();
+                    }
+                    else
+                    {
+                        inchk_val = (string)inchk_val;
+                    }
+                    if (!isMatchRow(vals, (string)inchk_val)) continue;
+                }
+
+                adjustDictionary((string)chk_val);
+            }
+
+
+            foreach(string str in dict.Keys)
+            {
+                reportText.AppendText(str + "\t" + dict[str].ToString() + "\r\n");
+            }
+            
+        }
+
     }
 }
