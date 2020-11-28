@@ -315,5 +315,108 @@ namespace EffectiveEx
             
         }
 
+        //罫線自動描画
+        private void tableBordered()
+        {
+
+            //コンボ選択値をアクティブシートにする
+            initCurrentWorksheet(sheetNameCombo.Text);
+
+            writeLog("罫線描画を開始します....");
+
+            int r = getStartRow();
+            int rx = getEndRow();
+            int cx = getEndCol();
+
+            for(int i=r; i<=rx; i++)
+            {
+                writeLog(i + "行目の処理....");
+                for(int j=1; j<=cx; j++)
+                {
+                    currentWs.Cell(i, j).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                    currentWs.Cell(i, j).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                    currentWs.Cell(i, j).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                    currentWs.Cell(i ,j).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                    currentWs.Cell(i, j).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+
+                }
+            }
+
+            writeLog("罫線描画の処理が完了しました....");
+
+        }
+
+        //LibraPlusの検査結果一覧表を書式設定する（LRPフォーマット）
+        private void lpReportFormat()
+        {
+            //罫線描画
+            tableBordered();
+
+            //コンボ選択値をアクティブシートにする
+            initCurrentWorksheet(sheetNameCombo.Text);
+
+            writeLog("LPRフォーマット処理を開始します....");
+
+            int r = getStartRow();
+            int rx = getEndRow();
+            int cx = getEndCol();
+
+            int sv_index = 6;
+
+            for (int i = r; i <= rx; i++)
+            {
+
+                writeLog(i + "行目の処理....");
+
+                for (int j = 1; j <= cx; j++)
+                {
+
+                    //header cell
+                    if (i == 1)
+                    {
+                        currentWs.Cell(i, j).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                        currentWs.Cell(i, j).Style.Font.Bold = true;
+                    }
+                    //data cell
+                    else
+                    {
+
+                        string sv_val = (string)currentWs.Cell(i, sv_index).Value;
+
+                        if (sv_val == "はい")
+                        {
+                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x89FFFF);
+                        }
+                        else if (sv_val == "はい(注記)")
+                        {
+                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x99FF99);
+                        }
+                        else if (sv_val == "いいえ")
+                        {
+                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFFB3B3);
+                        }
+                        else if (sv_val == "なし")
+                        {
+                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xDDDDDD);
+                        }
+                    }
+
+                }
+            }
+
+            writeLog("LPRフォーマット処理が完了しました....");
+
+
+            //保存の段取り
+            string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+            string ext = Path.GetExtension(currentWbPath);
+            string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
+
+            //別名保存
+            currentWb.SaveAs(new_savepath);
+            writeLog("処理が完了しました。出力ファイル：" + new_savepath);
+
+        }
+
     }
 }

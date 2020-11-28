@@ -59,6 +59,7 @@
             this.reportClearButton = new System.Windows.Forms.Button();
             this.statusBarControl = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lpReportFormatButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -100,9 +101,10 @@
             this.flowLayoutPanel1.Controls.Add(this.openButton);
             this.flowLayoutPanel1.Controls.Add(this.deleteRowButton);
             this.flowLayoutPanel1.Controls.Add(this.searchValsResultButton);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(208, 3);
+            this.flowLayoutPanel1.Controls.Add(this.lpReportFormatButton);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(140, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(358, 43);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(426, 43);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // openButton
@@ -375,6 +377,16 @@
             this.statusText.Size = new System.Drawing.Size(190, 20);
             this.statusText.Text = "Excelファイルを選択してください";
             // 
+            // lpReportFormatButton
+            // 
+            this.lpReportFormatButton.Location = new System.Drawing.Point(242, 3);
+            this.lpReportFormatButton.Name = "lpReportFormatButton";
+            this.lpReportFormatButton.Size = new System.Drawing.Size(117, 36);
+            this.lpReportFormatButton.TabIndex = 4;
+            this.lpReportFormatButton.Text = "LPRフォーマット";
+            this.lpReportFormatButton.UseVisualStyleBackColor = true;
+            this.lpReportFormatButton.Click += new System.EventHandler(this.lpReportFormatButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -439,6 +451,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox withoutConditionColNum;
+        private System.Windows.Forms.Button lpReportFormatButton;
     }
 }
 

@@ -70,5 +70,11 @@ namespace EffectiveEx
         {
             reportText.Clear();
         }
+
+        //LPRフォーマット
+        private void lpReportFormatButton_Click(object sender, EventArgs e)
+        {
+            lpReportFormat();
+        }
     }
 }
