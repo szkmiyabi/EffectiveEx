@@ -357,7 +357,6 @@ namespace EffectiveEx
                 for (int i = r; i <= rx; i++)
                 {
                     this.Invoke(__writeLog, i + "行目の処理....");
-                    //writeLog(i + "行目の処理....");
                     for (int j = 1; j <= cx; j++)
                     {
                         currentWs.Cell(i, j).Style.Border.TopBorder = XLBorderStyleValues.Thin;
