@@ -334,10 +334,12 @@ namespace EffectiveEx
         {
             await Task.Run(() =>
             {
+                //共通デリゲートインスタンス
                 _initCurrentWorksheetByName __initCurrentWorksheetByName = initCurrentWorksheetByName;
                 _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
                 _writeLog __writeLog = writeLog;
 
+                //メソッド固有デリゲートインスタンス
                 _getStartRow __getStartRow = getStartRow;
                 _getEndRow __getEndRow = getEndRow;
                 _getStartCol __getStartCol = getStartCol;
@@ -377,10 +379,12 @@ namespace EffectiveEx
         {
             await Task.Run(() =>
             {
+                //共通デリゲートインスタンス
                 _initCurrentWorksheetByName __initCurrentWorksheetByName = initCurrentWorksheetByName;
                 _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
                 _writeLog __writeLog = writeLog;
 
+                //メソッド固有デリゲートインスタンス
                 _getStartRow __getStartRow = getStartRow;
                 _getEndRow __getEndRow = getEndRow;
                 _getStartCol __getStartCol = getStartCol;
@@ -395,17 +399,17 @@ namespace EffectiveEx
 
                 this.Invoke(__writeLog, "LPRフォーマット処理を開始します....");
 
-                /*
-                int r = getStartRow();
-                int rx = getEndRow();
-                int cx = getEndCol();
+
+                int r = (int)this.Invoke(__getStartRow);
+                int rx = (int)this.Invoke(__getEndRow);
+                int cx = (int)this.Invoke(__getEndCol);
 
                 int sv_index = 6;
 
                 for (int i = r; i <= rx; i++)
                 {
 
-                    writeLog(i + "行目の処理....");
+                    this.Invoke(__writeLog, i + "行目の処理....");
 
                     for (int j = 1; j <= cx; j++)
                     {
@@ -415,6 +419,15 @@ namespace EffectiveEx
                         {
                             currentWs.Cell(i, j).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
                             currentWs.Cell(i, j).Style.Font.Bold = true;
+
+                            //列幅指定
+                            double[] colWidthArr = { 8.4, 8.4, 13.9, 45.6, 24, 8.4, 6.1, 45.2, 45.2, 45.2, 8.4, 8.4 };
+                            int wcnt = 1;
+                            foreach(double wc in colWidthArr)
+                            {
+                                currentWs.Column(wcnt).Width = wc;
+                                wcnt++;
+                            }
                         }
                         //data cell
                         else
@@ -442,7 +455,7 @@ namespace EffectiveEx
 
                     }
                 }
-                */
+
                 this.Invoke(__writeLog, "LPRフォーマット処理が完了しました....");
 
                 //保存の段取り

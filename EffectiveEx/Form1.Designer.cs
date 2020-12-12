@@ -34,6 +34,7 @@
             this.openButton = new System.Windows.Forms.Button();
             this.deleteRowButton = new System.Windows.Forms.Button();
             this.searchValsResultButton = new System.Windows.Forms.Button();
+            this.lpReportFormatButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.sheetNameCombo = new System.Windows.Forms.ComboBox();
@@ -59,7 +60,6 @@
             this.reportClearButton = new System.Windows.Forms.Button();
             this.statusBarControl = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lpReportFormatButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -136,6 +136,16 @@
             this.searchValsResultButton.Text = "値検索集計";
             this.searchValsResultButton.UseVisualStyleBackColor = true;
             this.searchValsResultButton.Click += new System.EventHandler(this.searchValsResultButton_Click);
+            // 
+            // lpReportFormatButton
+            // 
+            this.lpReportFormatButton.Location = new System.Drawing.Point(242, 3);
+            this.lpReportFormatButton.Name = "lpReportFormatButton";
+            this.lpReportFormatButton.Size = new System.Drawing.Size(158, 36);
+            this.lpReportFormatButton.TabIndex = 4;
+            this.lpReportFormatButton.Text = "LPR検査結果表整形";
+            this.lpReportFormatButton.UseVisualStyleBackColor = true;
+            this.lpReportFormatButton.Click += new System.EventHandler(this.lpReportFormatButton_Click);
             // 
             // flowLayoutPanel2
             // 
@@ -376,16 +386,6 @@
             this.statusText.Name = "statusText";
             this.statusText.Size = new System.Drawing.Size(190, 20);
             this.statusText.Text = "Excelファイルを選択してください";
-            // 
-            // lpReportFormatButton
-            // 
-            this.lpReportFormatButton.Location = new System.Drawing.Point(242, 3);
-            this.lpReportFormatButton.Name = "lpReportFormatButton";
-            this.lpReportFormatButton.Size = new System.Drawing.Size(117, 36);
-            this.lpReportFormatButton.TabIndex = 4;
-            this.lpReportFormatButton.Text = "LPRフォーマット";
-            this.lpReportFormatButton.UseVisualStyleBackColor = true;
-            this.lpReportFormatButton.Click += new System.EventHandler(this.lpReportFormatButton_Click);
             // 
             // Form1
             // 

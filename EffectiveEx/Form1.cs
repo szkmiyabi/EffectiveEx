@@ -71,11 +71,10 @@ namespace EffectiveEx
             reportText.Clear();
         }
 
-        //LPRフォーマット
+        //LPR検査結果表整形
         private async void lpReportFormatButton_Click(object sender, EventArgs e)
         {
             await lpReportFormat();
-            //await tableBorderedAsync();
         }
     }
 }
