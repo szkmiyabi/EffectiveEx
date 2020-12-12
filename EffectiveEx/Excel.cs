@@ -103,8 +103,8 @@ namespace EffectiveEx
             int cnt = 0;
 
             List<string> vals = getSearchValues();
-            int icx = Int32.Parse(columnValues.Text);
-            int skip_nm = Int32.Parse(skipRowNumbers.Text);
+            int icx = (int)columnValues.Value;
+            int skip_nm = (int)skipRowNumbers.Value;
             int r = getStartRow();
             int rx = getEndRow();
             int start_nm = r + skip_nm;
@@ -146,8 +146,8 @@ namespace EffectiveEx
         private void deleteRow()
         {
             List<string> vals = getSearchValues();
-            int icx = Int32.Parse(columnValues.Text);
-            int skip_nm = Int32.Parse(skipRowNumbers.Text);
+            int icx = (int)columnValues.Value;
+            int skip_nm = (int)skipRowNumbers.Value;
             int start_nm = 1 + skip_nm;
 
             for(int i=start_nm; i<=getEndRow(); i++)
@@ -187,16 +187,16 @@ namespace EffectiveEx
         private delegate void _deleteRowByCondition();
         private void deleteRowByCondition()
         {
-            if (sheetNameCombo.Text == "" || columnValues.Text == "" || skipRowNumbers.Text == "" || searchValues.Text == "")
+            if (sheetNameCombo.Text == "" || searchValues.Text == "")
             {
-                MessageBox.Show("シート名あるいは列番号あるいはスキップ行数あるいは検索条件が入力されていません");
+                MessageBox.Show("シート名あるいは検索条件が入力されていません");
                 return;
             }
 
             //コンボ選択値をアクティブシートにする
             initCurrentWorksheetByName(sheetNameCombo.Text);
 
-            int skip_nm = Int32.Parse(skipRowNumbers.Text);
+            int skip_nm = (int)skipRowNumbers.Value;
 
             //残す行数＋スキップ行数を取得
             int during = getHitsRowCount() + skip_nm;
@@ -253,9 +253,9 @@ namespace EffectiveEx
         //値検索集計
         private void searchValsResult()
         {
-            if (sheetNameCombo.Text == "" || columnValues.Text == "" || skipRowNumbers.Text == "")
+            if (sheetNameCombo.Text == "")
             {
-                MessageBox.Show("シート名あるいは列番号あるいはスキップ行数あるいは検索条件が入力されていません");
+                MessageBox.Show("シート名が入力されていません");
                 return;
             }
 
@@ -264,8 +264,8 @@ namespace EffectiveEx
 
             dict = new Dictionary<string, int>();
             List<string> vals = getSearchValues();
-            int icx = Int32.Parse(columnValues.Text);
-            int skip_nm = Int32.Parse(skipRowNumbers.Text);
+            int icx = (int)columnValues.Value;
+            int skip_nm = (int)skipRowNumbers.Value;
             int r = getStartRow();
             int rx = getEndRow();
             int start_nm = r + skip_nm;
@@ -295,7 +295,7 @@ namespace EffectiveEx
 
                 if ((searchValResutWithoutCheck.Checked == true))
                 {
-                    int without_cond_col = Int32.Parse(withoutConditionColNum.Text);
+                    int without_cond_col = (int)withoutConditionColNum.Value;
                     var inchk_val = currentWs.Cell(i, without_cond_col).Value;
                     Type inchk_t = currentWs.Cell(i, without_cond_col).Value.GetType();
                     if (inchk_t.Equals(typeof(double)) || inchk_t.Equals(typeof(int)) || inchk_t.Equals(typeof(float)))

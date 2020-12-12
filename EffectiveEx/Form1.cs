@@ -27,9 +27,6 @@ namespace EffectiveEx
             currentWs = null;
 
             sheetNameCombo.Enabled = false;
-            columnValues.Text = "1";
-            skipRowNumbers.Text = "1";
-            withoutConditionColNum.Text = "1";
             saveDirPath = getUserHomePath() + @"\Desktop\";
             outputDirectory.Text = saveDirPath;
         }
