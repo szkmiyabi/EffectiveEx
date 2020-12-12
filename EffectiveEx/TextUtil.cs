@@ -45,6 +45,7 @@ namespace EffectiveEx
         }
 
         //レポート出力
+        public delegate void _writeLog(string str);
         public void writeLog(string str)
         {
             reportText.AppendText(get_logtime() + " " + str + "\r\n");

@@ -14,24 +14,28 @@ namespace EffectiveEx
         Dictionary<string, int> dict = null;
 
         //カレントWorkbookをセット
+        private delegate void _initCurrentBook(string currentWbPath);
         private void initCurrentBook()
         {
             currentWb = new XLWorkbook(currentWbPath);
         }
 
         //カレントWorkbookのカレントSheetをセット
-        private void initCurrentWorksheet(int idx)
+        private delegate void _initCurrentWorksheetById(int idx);
+        private void initCurrentWorksheetById(int idx)
         {
             currentWs = currentWb.Worksheet(idx);
         }
 
         //カレントWorkbookのカレントSheetをセット（オーバーライド）
-        private void initCurrentWorksheet(string sname)
+        private delegate void _initCurrentWorksheetByName(string sname);
+        private void initCurrentWorksheetByName(string sname)
         {
             currentWs = currentWb.Worksheets.Worksheet(sname);
         }
 
         //対象シートコンボのセットアップ
+        private delegate void _initTargetWorksheetCombo();
         private void initTargetWorksheetCombo()
         {
             initCurrentBook();
@@ -48,6 +52,7 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲開始行を取得
+        private delegate int _getStartRow();
         private int getStartRow()
         {
             var first = currentWs.FirstCellUsed();
@@ -55,6 +60,7 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲最終行を取得
+        private delegate int _getEndRow();
         private int getEndRow()
         {
             var last = currentWs.LastCellUsed();
@@ -62,6 +68,7 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲開始列を取得
+        private delegate int _getStartCol();
         private int getStartCol()
         {
             var first = currentWs.FirstCellUsed();
@@ -69,6 +76,7 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲最終列を取得
+        private delegate int _getEndCol();
         private int getEndCol()
         {
             var last = currentWs.LastCellUsed();
@@ -76,6 +84,7 @@ namespace EffectiveEx
         }
 
         //条件に一致する行判定
+        private delegate Boolean _isMatchRow(List<string> data, string key);
         private Boolean isMatchRow(List<string> data, string key)
         {
             Boolean flg = false;
@@ -87,6 +96,7 @@ namespace EffectiveEx
         }
 
         //条件に一致する行数取得（スキップ行数は含まない）
+        private delegate int _getHitsRowCount();
         private int getHitsRowCount()
         {
             //カウンタ
@@ -132,6 +142,7 @@ namespace EffectiveEx
         }
 
         //行削除
+        private delegate void _deleteRow();
         private void deleteRow()
         {
             List<string> vals = getSearchValues();
@@ -173,6 +184,7 @@ namespace EffectiveEx
         }
 
         //行削除のラッパー関数
+        private delegate void _deleteRowByCondition();
         private void deleteRowByCondition()
         {
             if (sheetNameCombo.Text == "" || columnValues.Text == "" || skipRowNumbers.Text == "" || searchValues.Text == "")
@@ -182,7 +194,7 @@ namespace EffectiveEx
             }
 
             //コンボ選択値をアクティブシートにする
-            initCurrentWorksheet(sheetNameCombo.Text);
+            initCurrentWorksheetByName(sheetNameCombo.Text);
 
             int skip_nm = Int32.Parse(skipRowNumbers.Text);
 
@@ -207,6 +219,7 @@ namespace EffectiveEx
         }
 
         //キー存在判定
+        private delegate Boolean _isExistsKey(string key);
         private Boolean isExistsKey(string key)
         {
             Boolean flg = false;
@@ -218,6 +231,7 @@ namespace EffectiveEx
         }
 
         //辞書を生成
+        private delegate void _adjustDictionary(string key);
         private void adjustDictionary(string key)
         {
             if(dict.Count == 0)
@@ -246,7 +260,7 @@ namespace EffectiveEx
             }
 
             //コンボ選択値をアクティブシートにする
-            initCurrentWorksheet(sheetNameCombo.Text);
+            initCurrentWorksheetByName(sheetNameCombo.Text);
 
             dict = new Dictionary<string, int>();
             List<string> vals = getSearchValues();
@@ -316,105 +330,133 @@ namespace EffectiveEx
         }
 
         //罫線自動描画
-        private void tableBordered()
+        private async Task tableBorderedAsync()
         {
-
-            //コンボ選択値をアクティブシートにする
-            initCurrentWorksheet(sheetNameCombo.Text);
-
-            writeLog("罫線描画を開始します....");
-
-            int r = getStartRow();
-            int rx = getEndRow();
-            int cx = getEndCol();
-
-            for(int i=r; i<=rx; i++)
+            await Task.Run(() =>
             {
-                writeLog(i + "行目の処理....");
-                for(int j=1; j<=cx; j++)
+                _initCurrentWorksheetByName __initCurrentWorksheetByName = initCurrentWorksheetByName;
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _writeLog __writeLog = writeLog;
+
+                _getStartRow __getStartRow = getStartRow;
+                _getEndRow __getEndRow = getEndRow;
+                _getStartCol __getStartCol = getStartCol;
+                _getEndCol __getEndCol = getEndCol;
+
+                //コンボ選択値をアクティブシートにする
+                this.Invoke(__initCurrentWorksheetByName, (string)this.Invoke(__sheetNameComboVal));
+
+                this.Invoke(__writeLog, "罫線描画を開始します....");
+
+                int r = (int)this.Invoke(__getStartRow);
+                int rx = (int)this.Invoke(__getEndRow);
+                int cx = (int)this.Invoke(__getEndCol);
+
+                for (int i = r; i <= rx; i++)
                 {
-                    currentWs.Cell(i, j).Style.Border.TopBorder = XLBorderStyleValues.Thin;
-                    currentWs.Cell(i, j).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
-                    currentWs.Cell(i, j).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
-                    currentWs.Cell(i ,j).Style.Border.RightBorder = XLBorderStyleValues.Thin;
-                    currentWs.Cell(i, j).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+                    this.Invoke(__writeLog, i + "行目の処理....");
+                    //writeLog(i + "行目の処理....");
+                    for (int j = 1; j <= cx; j++)
+                    {
+                        currentWs.Cell(i, j).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                        currentWs.Cell(i, j).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                        currentWs.Cell(i, j).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                        currentWs.Cell(i, j).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                        currentWs.Cell(i, j).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
 
+                    }
                 }
-            }
 
-            writeLog("罫線描画の処理が完了しました....");
+                this.Invoke(__writeLog, "罫線描画の処理が完了しました....");
+            });
 
         }
 
         //LibraPlusの検査結果一覧表を書式設定する（LRPフォーマット）
-        private void lpReportFormat()
+        private async Task lpReportFormat()
         {
-            //罫線描画
-            tableBordered();
-
-            //コンボ選択値をアクティブシートにする
-            initCurrentWorksheet(sheetNameCombo.Text);
-
-            writeLog("LPRフォーマット処理を開始します....");
-
-            int r = getStartRow();
-            int rx = getEndRow();
-            int cx = getEndCol();
-
-            int sv_index = 6;
-
-            for (int i = r; i <= rx; i++)
+            await Task.Run(() =>
             {
+                _initCurrentWorksheetByName __initCurrentWorksheetByName = initCurrentWorksheetByName;
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _writeLog __writeLog = writeLog;
 
-                writeLog(i + "行目の処理....");
+                _getStartRow __getStartRow = getStartRow;
+                _getEndRow __getEndRow = getEndRow;
+                _getStartCol __getStartCol = getStartCol;
+                _getEndCol __getEndCol = getEndCol;
 
-                for (int j = 1; j <= cx; j++)
+
+                //罫線描画（処理完了まで待機）
+                tableBorderedAsync().Wait();
+
+                //コンボ選択値をアクティブシートにする
+                this.Invoke(__initCurrentWorksheetByName, (string)this.Invoke(__sheetNameComboVal));
+
+                this.Invoke(__writeLog, "LPRフォーマット処理を開始します....");
+
+                /*
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
+
+                int sv_index = 6;
+
+                for (int i = r; i <= rx; i++)
                 {
 
-                    //header cell
-                    if (i == 1)
-                    {
-                        currentWs.Cell(i, j).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-                        currentWs.Cell(i, j).Style.Font.Bold = true;
-                    }
-                    //data cell
-                    else
+                    writeLog(i + "行目の処理....");
+
+                    for (int j = 1; j <= cx; j++)
                     {
 
-                        string sv_val = (string)currentWs.Cell(i, sv_index).Value;
+                        //header cell
+                        if (i == 1)
+                        {
+                            currentWs.Cell(i, j).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+                            currentWs.Cell(i, j).Style.Font.Bold = true;
+                        }
+                        //data cell
+                        else
+                        {
 
-                        if (sv_val == "はい")
-                        {
-                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x89FFFF);
+                            string sv_val = (string)currentWs.Cell(i, sv_index).Value;
+
+                            if (sv_val == "はい")
+                            {
+                                currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x89FFFF);
+                            }
+                            else if (sv_val == "はい(注記)")
+                            {
+                                currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x99FF99);
+                            }
+                            else if (sv_val == "いいえ")
+                            {
+                                currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFFB3B3);
+                            }
+                            else if (sv_val == "なし")
+                            {
+                                currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xDDDDDD);
+                            }
                         }
-                        else if (sv_val == "はい(注記)")
-                        {
-                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0x99FF99);
-                        }
-                        else if (sv_val == "いいえ")
-                        {
-                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFFB3B3);
-                        }
-                        else if (sv_val == "なし")
-                        {
-                            currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xDDDDDD);
-                        }
+
                     }
-
                 }
-            }
+                */
+                this.Invoke(__writeLog, "LPRフォーマット処理が完了しました....");
 
-            writeLog("LPRフォーマット処理が完了しました....");
+                //保存の段取り
+                string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+                string ext = Path.GetExtension(currentWbPath);
+                string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
+
+                //別名保存
+                currentWb.SaveAs(new_savepath);
+                this.Invoke(__writeLog, "処理が完了しました。出力ファイル：" + new_savepath);
+
+            });
 
 
-            //保存の段取り
-            string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
-            string ext = Path.GetExtension(currentWbPath);
-            string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
-
-            //別名保存
-            currentWb.SaveAs(new_savepath);
-            writeLog("処理が完了しました。出力ファイル：" + new_savepath);
 
         }
 

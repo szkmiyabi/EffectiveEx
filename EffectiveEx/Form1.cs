@@ -72,9 +72,10 @@ namespace EffectiveEx
         }
 
         //LPRフォーマット
-        private void lpReportFormatButton_Click(object sender, EventArgs e)
+        private async void lpReportFormatButton_Click(object sender, EventArgs e)
         {
-            lpReportFormat();
+            await lpReportFormat();
+            //await tableBorderedAsync();
         }
     }
 }
