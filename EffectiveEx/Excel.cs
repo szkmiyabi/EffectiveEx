@@ -233,7 +233,6 @@ namespace EffectiveEx
         }
 
         //キー存在判定
-        private delegate Boolean _isExistsKey(string key);
         private Boolean isExistsKey(string key)
         {
             Boolean flg = false;
