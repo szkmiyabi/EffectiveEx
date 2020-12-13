@@ -339,25 +339,14 @@ namespace EffectiveEx
                 _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
                 _writeLog __writeLog = writeLog;
 
-                //メソッド固有デリゲートインスタンス
-                /*
-                _getStartRow __getStartRow = getStartRow;
-                _getEndRow __getEndRow = getEndRow;
-                _getStartCol __getStartCol = getStartCol;
-                _getEndCol __getEndCol = getEndCol;
-                */
-
                 //コンボ選択値をアクティブシートにする
                 this.Invoke(__initCurrentWorksheetByName, (string)this.Invoke(__sheetNameComboVal));
 
                 this.Invoke(__writeLog, "罫線描画を開始します....");
 
                 int r = getStartRow();
-                //int r = (int)this.Invoke(__getStartRow);
                 int rx = getEndRow();
-                //int rx = (int)this.Invoke(__getEndRow);
                 int cx = getEndCol();
-                //int cx = (int)this.Invoke(__getEndCol);
 
                 for (int i = r; i <= rx; i++)
                 {
@@ -388,12 +377,6 @@ namespace EffectiveEx
                 _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
                 _writeLog __writeLog = writeLog;
 
-                //メソッド固有デリゲートインスタンス
-                _getStartRow __getStartRow = getStartRow;
-                _getEndRow __getEndRow = getEndRow;
-                _getStartCol __getStartCol = getStartCol;
-                _getEndCol __getEndCol = getEndCol;
-
 
                 //罫線描画（処理完了まで待機）
                 tableBorderedAsync().Wait();
@@ -403,10 +386,9 @@ namespace EffectiveEx
 
                 this.Invoke(__writeLog, "LPRフォーマット処理を開始します....");
 
-
-                int r = (int)this.Invoke(__getStartRow);
-                int rx = (int)this.Invoke(__getEndRow);
-                int cx = (int)this.Invoke(__getEndCol);
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
 
                 int sv_index = 6;
 
