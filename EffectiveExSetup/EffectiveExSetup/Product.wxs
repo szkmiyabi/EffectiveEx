@@ -17,6 +17,11 @@
             </File>
           </Component>
 
+          <Component Id="Component2" Guid="B86A91D4-2181-4BC4-B71B-04D2104EB2B3"></Component>
+          <Component Id="Component3" Guid="B497A85F-F0A8-4691-9ED5-20DD17321E77"></Component>
+          <Component Id="Component4" Guid="D7236BD9-FF28-48B3-88F3-F2399822B217"></Component>
+          <Component Id="Component5" Guid="5769D617-EFBD-44A2-AC74-6ECDAA7CE220"></Component>
+
         </Directory>
       </Directory>
 
@@ -32,6 +37,15 @@
       <Directory Id="DesktopFolder" Name="Desktop" />
 
     </Directory>
+
+    <Feature Id="Complete" Level="1">
+      <ComponentRef Id="Component1" />
+      <ComponentRef Id="Component2" />
+      <ComponentRef Id="Component3" />
+      <ComponentRef Id="Component4" />
+      <ComponentRef Id="Component5" />
+      <ComponentRef Id="ProgramMenuDir" />
+    </Feature>
 
     <Icon Id="EFXIcon.exe" SourceFile="..\..\EffectiveEx\bin\Release\EffectiveEx.exe" />
     
