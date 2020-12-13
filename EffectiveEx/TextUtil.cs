@@ -12,11 +12,15 @@ namespace EffectiveEx
         //検索値配列を取得
         private List<string> getSearchValues()
         {
+            //デリゲートインスタンス
+            _searchValuesVal __searchValuesVal = searchValuesVal;
+
             List<string> data = new List<string>();
-            var src = searchValues.Text;
+            //非同期処理のためデリゲート経由で値を拾う
+            var src = (string)this.Invoke(__searchValuesVal);
             string[] del = { "\r\n" };
             string[] lines = src.Split(del, StringSplitOptions.None);
-            for(int i=0; i<lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 data.Add(lines[i].ToString());
             }

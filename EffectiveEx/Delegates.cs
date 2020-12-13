@@ -16,5 +16,26 @@ namespace EffectiveEx
             return sheetNameCombo.Text;
         }
 
+        //searchValues.Textのデリゲート
+        public delegate string _searchValuesVal();
+        public string searchValuesVal()
+        {
+            return searchValues.Text;
+        }
+
+        //columnValues.Valueのデリゲート
+        public delegate int _columnValuesVal();
+        public int columnValuesVal()
+        {
+            return (int)columnValues.Value;
+        }
+
+        //skipRowNumbers.Valueのデリゲート
+        public delegate int _skipRowNumbersVal();
+        public int skipRowNumbersVal()
+        {
+            return (int)skipRowNumbers.Value;
+        }
+
     }
 }
