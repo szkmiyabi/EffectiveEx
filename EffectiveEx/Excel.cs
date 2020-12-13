@@ -556,7 +556,7 @@ namespace EffectiveEx
             }
 
             //DataGridFormを表示
-            data_grid_form.init(tbl, "Worksheetプレビュー");
+            data_grid_form.init(tbl, "プレビュー");
             data_grid_form.Show();
 
         }

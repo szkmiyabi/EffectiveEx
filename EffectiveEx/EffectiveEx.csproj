@@ -85,6 +85,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Background.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="DataGridForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="appicon.ico" />
+    <EmbeddedResource Include="resources\grid-icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

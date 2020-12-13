@@ -27,6 +27,7 @@ namespace EffectiveEx
             gridTableView.RowPostPaint += new DataGridViewRowPostPaintEventHandler(RowPostPaint);
             //メインフォームと紐付け
             main_form = Form1.main_form;
+            this.Icon = main_form.getIconFromResource("grid-icon.ico");
         }
 
         //行番号表示

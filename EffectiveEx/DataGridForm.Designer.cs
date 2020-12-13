@@ -43,8 +43,8 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.21461F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.78539F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.2449F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.755102F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(868, 490);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -56,7 +56,7 @@
             this.gridTableView.Name = "gridTableView";
             this.gridTableView.RowHeadersWidth = 49;
             this.gridTableView.RowTemplate.Height = 23;
-            this.gridTableView.Size = new System.Drawing.Size(862, 421);
+            this.gridTableView.Size = new System.Drawing.Size(862, 445);
             this.gridTableView.TabIndex = 0;
             // 
             // DataGridForm
