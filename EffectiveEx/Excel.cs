@@ -14,28 +14,24 @@ namespace EffectiveEx
         Dictionary<string, int> dict = null;
 
         //カレントWorkbookをセット
-        private delegate void _initCurrentBook(string currentWbPath);
         private void initCurrentBook()
         {
             currentWb = new XLWorkbook(currentWbPath);
         }
 
         //カレントWorkbookのカレントSheetをセット
-        private delegate void _initCurrentWorksheetById(int idx);
-        private void initCurrentWorksheetById(int idx)
+        private void initCurrentWorksheet(int idx)
         {
             currentWs = currentWb.Worksheet(idx);
         }
 
         //カレントWorkbookのカレントSheetをセット（オーバーライド）
-        private delegate void _initCurrentWorksheetByName(string sname);
-        private void initCurrentWorksheetByName(string sname)
+        private void initCurrentWorksheet(string sname)
         {
             currentWs = currentWb.Worksheets.Worksheet(sname);
         }
 
         //対象シートコンボのセットアップ
-        private delegate void _initTargetWorksheetCombo();
         private void initTargetWorksheetCombo()
         {
             initCurrentBook();
@@ -52,7 +48,6 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲開始行を取得
-        private delegate int _getStartRow();
         private int getStartRow()
         {
             var first = currentWs.FirstCellUsed();
@@ -60,7 +55,6 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲最終行を取得
-        private delegate int _getEndRow();
         private int getEndRow()
         {
             var last = currentWs.LastCellUsed();
@@ -68,7 +62,6 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲開始列を取得
-        private delegate int _getStartCol();
         private int getStartCol()
         {
             var first = currentWs.FirstCellUsed();
@@ -76,7 +69,6 @@ namespace EffectiveEx
         }
 
         //カレントSheetのデータ範囲最終列を取得
-        private delegate int _getEndCol();
         private int getEndCol()
         {
             var last = currentWs.LastCellUsed();
@@ -84,7 +76,6 @@ namespace EffectiveEx
         }
 
         //条件に一致する行判定
-        private delegate Boolean _isMatchRow(List<string> data, string key);
         private Boolean isMatchRow(List<string> data, string key)
         {
             Boolean flg = false;
@@ -96,7 +87,6 @@ namespace EffectiveEx
         }
 
         //条件に一致する行数取得（スキップ行数は含まない）
-        private delegate int _getHitsRowCount();
         private int getHitsRowCount()
         {
             //カウンタ
@@ -142,7 +132,6 @@ namespace EffectiveEx
         }
 
         //行削除
-        private delegate void _deleteRow();
         private void deleteRow()
         {
             List<string> vals = getSearchValues();
@@ -184,7 +173,6 @@ namespace EffectiveEx
         }
 
         //行削除のラッパー関数
-        private delegate void _deleteRowByCondition();
         private void deleteRowByCondition()
         {
             if (sheetNameCombo.Text == "" || searchValues.Text == "")
@@ -194,7 +182,7 @@ namespace EffectiveEx
             }
 
             //コンボ選択値をアクティブシートにする
-            initCurrentWorksheetByName(sheetNameCombo.Text);
+            initCurrentWorksheet(sheetNameCombo.Text);
 
             int skip_nm = (int)skipRowNumbers.Value;
 
@@ -231,7 +219,6 @@ namespace EffectiveEx
         }
 
         //辞書を生成
-        private delegate void _adjustDictionary(string key);
         private void adjustDictionary(string key)
         {
             if(dict.Count == 0)
@@ -260,7 +247,7 @@ namespace EffectiveEx
             }
 
             //コンボ選択値をアクティブシートにする
-            initCurrentWorksheetByName(sheetNameCombo.Text);
+            initCurrentWorksheet(sheetNameCombo.Text);
 
             dict = new Dictionary<string, int>();
             List<string> vals = getSearchValues();
@@ -335,12 +322,11 @@ namespace EffectiveEx
             await Task.Run(() =>
             {
                 //共通デリゲートインスタンス
-                _initCurrentWorksheetByName __initCurrentWorksheetByName = initCurrentWorksheetByName;
                 _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
                 _writeLog __writeLog = writeLog;
 
                 //コンボ選択値をアクティブシートにする
-                this.Invoke(__initCurrentWorksheetByName, (string)this.Invoke(__sheetNameComboVal));
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
 
                 this.Invoke(__writeLog, "罫線描画を開始します....");
 
@@ -373,7 +359,6 @@ namespace EffectiveEx
             await Task.Run(() =>
             {
                 //共通デリゲートインスタンス
-                _initCurrentWorksheetByName __initCurrentWorksheetByName = initCurrentWorksheetByName;
                 _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
                 _writeLog __writeLog = writeLog;
 
@@ -382,7 +367,7 @@ namespace EffectiveEx
                 tableBorderedAsync().Wait();
 
                 //コンボ選択値をアクティブシートにする
-                this.Invoke(__initCurrentWorksheetByName, (string)this.Invoke(__sheetNameComboVal));
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
 
                 this.Invoke(__writeLog, "LPRフォーマット処理を開始します....");
 
