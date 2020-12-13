@@ -318,7 +318,7 @@ namespace EffectiveEx
                         chk_val = (string)chk_val;
                     }
 
-                    if (((Boolean)this.Invoke(__searchResultWithoutCheckIsChecked) == true))
+                    if ((Boolean)this.Invoke(__searchResultWithoutCheckIsChecked) == true)
                     {
                         int without_cond_col = (int)this.Invoke(__withoutConditionColNumVal);
                         var inchk_val = currentWs.Cell(i, without_cond_col).Value;
