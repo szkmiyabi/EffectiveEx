@@ -518,7 +518,7 @@ namespace EffectiveEx
             //DataGridViewのヘッダーを設定
             for(int cnt = 1; cnt<=cx; cnt++)
             {
-                tbl.Columns.Add(cnt.ToString());
+                tbl.Columns.Add("列" + cnt.ToString());
             }
 
             //Worksheetを走査してDataTable組み立て
