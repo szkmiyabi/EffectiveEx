@@ -57,9 +57,9 @@ namespace EffectiveEx
         }
 
         //値集計検索
-        private void searchValsResultButton_Click(object sender, EventArgs e)
+        private async void searchValsResultButton_Click(object sender, EventArgs e)
         {
-            searchValsResult();
+            await searchValsResult();
         }
 
         //クリア

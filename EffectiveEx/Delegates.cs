@@ -37,5 +37,26 @@ namespace EffectiveEx
             return (int)skipRowNumbers.Value;
         }
 
+        //withoutConditionColNum.Valueのデリゲート
+        public delegate int _withoutConditionColNumVal();
+        public int withoutConditionColNumVal()
+        {
+            return (int)withoutConditionColNum.Value;
+        }
+
+        //searchResultWithoutCheck.Checkedのデリゲート
+        public delegate Boolean _searchResultWithoutCheckIsChecked();
+        public Boolean searchResultWithoutCheckIsChecked()
+        {
+            return searchValResultWithoutCheck.Checked;
+        }
+
+        //reportText.AppendTextのデリゲート
+        public delegate void _reportTextAppendTextThis(string key, int val);
+        public void reportTextAppendTextThis(string key, int val)
+        {
+            reportText.AppendText(key + "\t" + val + "\r\n");
+        }
+
     }
 }

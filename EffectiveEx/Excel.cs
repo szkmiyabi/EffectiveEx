@@ -264,81 +264,96 @@ namespace EffectiveEx
         }
 
         //値検索集計
-        private void searchValsResult()
+        private async Task searchValsResult()
         {
-            if (sheetNameCombo.Text == "")
+
+            await Task.Run(() =>
             {
-                MessageBox.Show("シート名が入力されていません");
-                return;
-            }
+                //デリゲートインスタンス
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _skipRowNumbersVal __skipRowNumbersVal = skipRowNumbersVal;
+                _searchValuesVal __searchValuesVal = searchValuesVal;
+                _columnValuesVal __columnValuesVal = columnValuesVal;
+                _withoutConditionColNumVal __withoutConditionColNumVal = withoutConditionColNumVal;
+                _searchResultWithoutCheckIsChecked __searchResultWithoutCheckIsChecked = searchResultWithoutCheckIsChecked;
+                _reportTextAppendTextThis __reportTextAppendTextThis = reportTextAppendTextThis;
+                _writeLog __writeLog = writeLog;
 
-            //コンボ選択値をアクティブシートにする
-            initCurrentWorksheet(sheetNameCombo.Text);
-
-            dict = new Dictionary<string, int>();
-            List<string> vals = getSearchValues();
-            int icx = (int)columnValues.Value;
-            int skip_nm = (int)skipRowNumbers.Value;
-            int r = getStartRow();
-            int rx = getEndRow();
-            int start_nm = r + skip_nm;
-
-            for (int i = start_nm; i <= rx; i++)
-            {
-                //条件判定のためのデータ取り出し処理
-                var chk_val = currentWs.Cell(i, icx).Value;
-                Type chk_t = currentWs.Cell(i, icx).Value.GetType();
-                if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
+                if ((string)this.Invoke(__sheetNameComboVal) == "")
                 {
-                    chk_val = chk_val.ToString();
-                }
-                else if (chk_t.Equals(typeof(DateTime)))
-                {
-                    chk_val = chk_val.ToString();
-                }
-                else if (chk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
-                {
-                    chk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
-                    chk_val = chk_val.ToString();
-                }
-                else
-                {
-                    chk_val = (string)chk_val;
+                    MessageBox.Show("シート名が入力されていません");
+                    return;
                 }
 
-                if ((searchValResutWithoutCheck.Checked == true))
+                //コンボ選択値をアクティブシートにする
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+
+                dict = new Dictionary<string, int>();
+                List<string> vals = getSearchValues();
+                int icx = (int)this.Invoke(__columnValuesVal);
+                int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
+                int r = getStartRow();
+                int rx = getEndRow();
+                int start_nm = r + skip_nm;
+
+                for (int i = start_nm; i <= rx; i++)
                 {
-                    int without_cond_col = (int)withoutConditionColNum.Value;
-                    var inchk_val = currentWs.Cell(i, without_cond_col).Value;
-                    Type inchk_t = currentWs.Cell(i, without_cond_col).Value.GetType();
-                    if (inchk_t.Equals(typeof(double)) || inchk_t.Equals(typeof(int)) || inchk_t.Equals(typeof(float)))
+                    //条件判定のためのデータ取り出し処理
+                    var chk_val = currentWs.Cell(i, icx).Value;
+                    Type chk_t = currentWs.Cell(i, icx).Value.GetType();
+                    if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
                     {
-                        inchk_val = inchk_val.ToString();
+                        chk_val = chk_val.ToString();
                     }
-                    else if (inchk_t.Equals(typeof(DateTime)))
+                    else if (chk_t.Equals(typeof(DateTime)))
                     {
-                        inchk_val = inchk_val.ToString();
+                        chk_val = chk_val.ToString();
                     }
-                    else if (inchk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
+                    else if (chk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
                     {
-                        inchk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
-                        inchk_val = chk_val.ToString();
+                        chk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
+                        chk_val = chk_val.ToString();
                     }
                     else
                     {
-                        inchk_val = (string)inchk_val;
+                        chk_val = (string)chk_val;
                     }
-                    if (!isMatchRow(vals, (string)inchk_val)) continue;
+
+                    if (((Boolean)this.Invoke(__searchResultWithoutCheckIsChecked) == true))
+                    {
+                        int without_cond_col = (int)this.Invoke(__withoutConditionColNumVal);
+                        var inchk_val = currentWs.Cell(i, without_cond_col).Value;
+                        Type inchk_t = currentWs.Cell(i, without_cond_col).Value.GetType();
+                        if (inchk_t.Equals(typeof(double)) || inchk_t.Equals(typeof(int)) || inchk_t.Equals(typeof(float)))
+                        {
+                            inchk_val = inchk_val.ToString();
+                        }
+                        else if (inchk_t.Equals(typeof(DateTime)))
+                        {
+                            inchk_val = inchk_val.ToString();
+                        }
+                        else if (inchk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
+                        {
+                            inchk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
+                            inchk_val = chk_val.ToString();
+                        }
+                        else
+                        {
+                            inchk_val = (string)inchk_val;
+                        }
+                        if (!isMatchRow(vals, (string)inchk_val)) continue;
+                    }
+
+                    adjustDictionary((string)chk_val);
                 }
 
-                adjustDictionary((string)chk_val);
-            }
+                foreach (string str in dict.Keys)
+                {
+                    this.Invoke(__reportTextAppendTextThis, str, dict[str]);
+                    //reportText.AppendText(str + "\t" + dict[str].ToString() + "\r\n");
+                }
 
-
-            foreach(string str in dict.Keys)
-            {
-                reportText.AppendText(str + "\t" + dict[str].ToString() + "\r\n");
-            }
+            });
             
         }
 
