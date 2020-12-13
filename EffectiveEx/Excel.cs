@@ -89,12 +89,19 @@ namespace EffectiveEx
         //条件に一致する行数取得（スキップ行数は含まない）
         private int getHitsRowCount()
         {
+
+            //デリゲートインスタンス
+            _columnValuesVal __columnValuesVal = columnValuesVal;
+            _skipRowNumbersVal __skipRowNumbersVal = skipRowNumbersVal;
+
             //カウンタ
             int cnt = 0;
 
             List<string> vals = getSearchValues();
-            int icx = (int)columnValues.Value;
-            int skip_nm = (int)skipRowNumbers.Value;
+            int icx = (int)this.Invoke(__columnValuesVal);
+            //int icx = (int)columnValues.Value;
+            int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
+            //int skip_nm = (int)skipRowNumbers.Value;
             int r = getStartRow();
             int rx = getEndRow();
             int start_nm = r + skip_nm;
@@ -132,78 +139,103 @@ namespace EffectiveEx
         }
 
         //行削除
-        private void deleteRow()
+        private async Task deleteRow()
         {
-            List<string> vals = getSearchValues();
-            int icx = (int)columnValues.Value;
-            int skip_nm = (int)skipRowNumbers.Value;
-            int start_nm = 1 + skip_nm;
 
-            for(int i=start_nm; i<=getEndRow(); i++)
+            await Task.Run(() =>
             {
-                //条件判定のためのデータ取り出し処理
-                var chk_val = currentWs.Cell(i, icx).Value;
-                Type chk_t = currentWs.Cell(i, icx).Value.GetType();
-                if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
-                {
-                    chk_val = chk_val.ToString();
-                }
-                else if (chk_t.Equals(typeof(DateTime)))
-                {
-                    chk_val = chk_val.ToString();
-                }
-                else if (chk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
-                {
-                    chk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
-                    chk_val = chk_val.ToString();
-                }
-                else
-                {
-                    chk_val = (string)chk_val;
-                }
+                //デリゲートインスタンス
+                _columnValuesVal __columnValuesVal = columnValuesVal;
+                _skipRowNumbersVal __skipRowNumbersVal = skipRowNumbersVal;
+                _writeLog __writeLog = writeLog;
 
-                //条件に一致しない時に削除実行し関数を抜ける（削除の度に全体データ範囲行数が減ってしまうため）
-                if (!isMatchRow(vals, (string)chk_val))
+                List<string> vals = getSearchValues();
+                int icx = (int)this.Invoke(__columnValuesVal);
+                //int icx = (int)columnValues.Value;
+                int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
+                //int skip_nm = (int)skipRowNumbers.Value;
+                int start_nm = 1 + skip_nm;
+
+                for (int i = start_nm; i <= getEndRow(); i++)
                 {
-                    writeLog("行を削除しました");
-                    currentWs.Row(i).Delete();
-                    break;
+                    //条件判定のためのデータ取り出し処理
+                    var chk_val = currentWs.Cell(i, icx).Value;
+                    Type chk_t = currentWs.Cell(i, icx).Value.GetType();
+                    if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
+                    {
+                        chk_val = chk_val.ToString();
+                    }
+                    else if (chk_t.Equals(typeof(DateTime)))
+                    {
+                        chk_val = chk_val.ToString();
+                    }
+                    else if (chk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
+                    {
+                        chk_val = (ClosedXML.Excel.XLHyperlink)chk_val;
+                        chk_val = chk_val.ToString();
+                    }
+                    else
+                    {
+                        chk_val = (string)chk_val;
+                    }
+
+                    //条件に一致しない時に削除実行し関数を抜ける（削除の度に全体データ範囲行数が減ってしまうため）
+                    if (!isMatchRow(vals, (string)chk_val))
+                    {
+                        this.Invoke(__writeLog, "行を削除しました");
+                        //writeLog("行を削除しました");
+                        currentWs.Row(i).Delete();
+                        break;
+                    }
                 }
-            }
+            });
+
         }
 
         //行削除のラッパー関数
-        private void deleteRowByCondition()
+        private async Task deleteRowByCondition()
         {
-            if (sheetNameCombo.Text == "" || searchValues.Text == "")
+
+            await Task.Run(() =>
             {
-                MessageBox.Show("シート名あるいは検索条件が入力されていません");
-                return;
-            }
+                //デリゲートインスタンス
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _skipRowNumbersVal __skipRowNumbersVal = skipRowNumbersVal;
+                _searchValuesVal __searchValuesVal = searchValuesVal;
+                _writeLog __writeLog = writeLog;
 
-            //コンボ選択値をアクティブシートにする
-            initCurrentWorksheet(sheetNameCombo.Text);
+                if ((string)this.Invoke(__sheetNameComboVal) == "" || (string)this.Invoke(__searchValuesVal) == "")
+                {
+                    MessageBox.Show("シート名あるいは検索条件が入力されていません");
+                    return;
+                }
 
-            int skip_nm = (int)skipRowNumbers.Value;
+                //コンボ選択値をアクティブシートにする
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
 
-            //残す行数＋スキップ行数を取得
-            int during = getHitsRowCount() + skip_nm;
+                int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
 
-            //データ範囲行数が残す行数＋スキップ行数に達するまでループ
-            while(getEndRow() != during)
-            {
-                //ひたすら行を削除する
-                deleteRow();
-            }
+                //残す行数＋スキップ行数を取得
+                int during = getHitsRowCount() + skip_nm;
 
-            //保存の段取り
-            string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
-            string ext = Path.GetExtension(currentWbPath);
-            string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
+                //データ範囲行数が残す行数＋スキップ行数に達するまでループ
+                while (getEndRow() != during)
+                {
+                    //ひたすら行を削除する
+                    deleteRow().Wait();
+                }
 
-            //別名保存
-            currentWb.SaveAs(new_savepath);
-            writeLog("処理が完了しました。出力ファイル：" + new_savepath);
+                //保存の段取り
+                string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+                string ext = Path.GetExtension(currentWbPath);
+                string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
+
+                //別名保存
+                currentWb.SaveAs(new_savepath);
+                this.Invoke(__writeLog, "処理が完了しました。出力ファイル：" + new_savepath);
+                //writeLog("処理が完了しました。出力ファイル：" + new_savepath);
+            });
+
         }
 
         //キー存在判定

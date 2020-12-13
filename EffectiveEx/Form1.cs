@@ -51,9 +51,9 @@ namespace EffectiveEx
         }
 
         //行削除
-        private void deleteRowButton_Click(object sender, EventArgs e)
+        private async void deleteRowButton_Click(object sender, EventArgs e)
         {
-            deleteRowByCondition();
+            await deleteRowByCondition();
         }
 
         //値集計検索
