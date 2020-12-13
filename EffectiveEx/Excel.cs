@@ -99,9 +99,7 @@ namespace EffectiveEx
 
             List<string> vals = getSearchValues();
             int icx = (int)this.Invoke(__columnValuesVal);
-            //int icx = (int)columnValues.Value;
             int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
-            //int skip_nm = (int)skipRowNumbers.Value;
             int r = getStartRow();
             int rx = getEndRow();
             int start_nm = r + skip_nm;
@@ -151,9 +149,7 @@ namespace EffectiveEx
 
                 List<string> vals = getSearchValues();
                 int icx = (int)this.Invoke(__columnValuesVal);
-                //int icx = (int)columnValues.Value;
                 int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
-                //int skip_nm = (int)skipRowNumbers.Value;
                 int start_nm = 1 + skip_nm;
 
                 for (int i = start_nm; i <= getEndRow(); i++)
@@ -183,7 +179,6 @@ namespace EffectiveEx
                     if (!isMatchRow(vals, (string)chk_val))
                     {
                         this.Invoke(__writeLog, "行を削除しました");
-                        //writeLog("行を削除しました");
                         currentWs.Row(i).Delete();
                         break;
                     }
@@ -233,7 +228,6 @@ namespace EffectiveEx
                 //別名保存
                 currentWb.SaveAs(new_savepath);
                 this.Invoke(__writeLog, "処理が完了しました。出力ファイル：" + new_savepath);
-                //writeLog("処理が完了しました。出力ファイル：" + new_savepath);
             });
 
         }
