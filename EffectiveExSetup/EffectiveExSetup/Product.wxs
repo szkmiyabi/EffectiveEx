@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="EBF8A92F-BD87-42D3-9810-DA6433E5C17F" Name="EffectiveEx" Language="1041" Version="1.0.0.0" Manufacturer="JCI-TN" UpgradeCode="c9eb786e-bc29-4b13-916a-7b99256d36df">
+	<Product Id="EBF8A92F-BD87-42D3-9810-DA6433E5C17F" Name="EffectiveEx" Language="1041" Version="1.0.0.1" Manufacturer="JCI-TN" UpgradeCode="c9eb786e-bc29-4b13-916a-7b99256d36df">
 		<Package Id="*" Manufacturer="JCI-TN" InstallerVersion="200" Compressed="yes" />
 
     <Media Id="1" Cabinet="Product.cab" EmbedCab="yes" />
