@@ -21,6 +21,7 @@ namespace EffectiveEx
             InitializeComponent();
             gridTableView.RowHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.True;
             gridTableView.AllowUserToAddRows = false;
+            main_form = Form1.main_form;
         }
 
         //データグリッドセットアップ

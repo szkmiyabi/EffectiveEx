@@ -18,6 +18,12 @@ namespace EffectiveEx
         XLWorkbook currentWb;
         IXLWorksheet currentWs;
 
+        //Form1インスタンス
+        private static Form1 _main_form;
+
+        //DataGridFormインスタンス
+        private static DataGridForm _data_grid_form;
+
         //コンストラクタ
         public Form1()
         {
@@ -29,6 +35,29 @@ namespace EffectiveEx
             sheetNameCombo.Enabled = false;
             saveDirPath = getUserHomePath() + @"\Desktop\";
             outputDirectory.Text = saveDirPath;
+
+            //静的プロパティに自身を代入
+            _main_form = this;
+        }
+
+        //Form1のゲッターとセッター
+        public static Form1 main_form
+        {
+            get { return _main_form; }
+            set { _main_form = value; }
+        }
+
+        //DataGridFormのゲッター
+        public static DataGridForm data_grid_form
+        {
+            get
+            {
+                if(_data_grid_form == null || _data_grid_form.IsDisposed)
+                {
+                    _data_grid_form = new DataGridForm();
+                }
+                return _data_grid_form;
+            }
         }
 
         //出力先参照ボタンクリック
