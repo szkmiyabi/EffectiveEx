@@ -350,7 +350,6 @@ namespace EffectiveEx
                 foreach (string str in dict.Keys)
                 {
                     this.Invoke(__reportTextAppendTextThis, str, dict[str]);
-                    //reportText.AppendText(str + "\t" + dict[str].ToString() + "\r\n");
                 }
 
             });
