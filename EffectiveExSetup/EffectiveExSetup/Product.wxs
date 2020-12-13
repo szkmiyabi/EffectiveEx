@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="EffectiveExSetup" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="c9eb786e-bc29-4b13-916a-7b99256d36df">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+	<Product Id="EBF8A92F-BD87-42D3-9810-DA6433E5C17F" Name="EffectiveEx" Language="1041" Version="1.0.0.0" Manufacturer="JCI-TN" UpgradeCode="c9eb786e-bc29-4b13-916a-7b99256d36df">
+		<Package Id="*" Manufacturer="JCI-TN" InstallerVersion="200" Compressed="yes" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate />
