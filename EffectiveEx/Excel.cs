@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Data;
 
 namespace EffectiveEx
 {
@@ -479,6 +480,68 @@ namespace EffectiveEx
 
             });
 
+        }
+
+        //Excelワークシートをプレビュー
+        private delegate void _previewWorksheet();
+
+        private void previewWorksheet()
+        {
+            DataTable tbl = new DataTable("worksheetPreviewTable");
+
+            //共通デリゲートインスタンス
+            _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+            _writeLog __writeLog = writeLog;
+
+
+            //罫線描画（処理完了まで待機）
+            tableBorderedAsync().Wait();
+
+            //コンボ選択値をアクティブシートにする
+            initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+
+            this.Invoke(__writeLog, "LPRフォーマット処理を開始します....");
+
+            int r = getStartRow();
+            int rx = getEndRow();
+            int cx = getEndCol();
+
+            //headerを設定
+            for(int cnt = 1; cnt<=cx; cnt++)
+            {
+                tbl.Columns.Add(cnt.ToString());
+            }
+
+            for(int i=r; i<=rx; i++)
+            {
+                List<string> cols = new List<string>();
+
+                for (int j=1; j<=cx; j++)
+                {
+                    var cell_val = currentWs.Cell(i, j).Value;
+                    Type chk_t = currentWs.Cell(i, j).Value.GetType();
+                    if (chk_t.Equals(typeof(double)) || chk_t.Equals(typeof(int)) || chk_t.Equals(typeof(float)))
+                    {
+                        cell_val = cell_val.ToString();
+                    }
+                    else if (chk_t.Equals(typeof(DateTime)))
+                    {
+                        cell_val = cell_val.ToString();
+                    }
+                    else if (chk_t.Equals(typeof(ClosedXML.Excel.XLHyperlink)))
+                    {
+                        cell_val = (ClosedXML.Excel.XLHyperlink)cell_val;
+                        cell_val = cell_val.ToString();
+                    }
+                    else
+                    {
+                        cell_val = (string)cell_val;
+                    }
+                    cols.Add((string)cell_val);
+                }
+                tbl.Rows.Add(cols);
+
+            }
 
 
         }
