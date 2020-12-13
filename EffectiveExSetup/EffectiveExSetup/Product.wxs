@@ -12,8 +12,8 @@
 
           <Component Id="Component1" Guid="66DFB5F1-1AFB-497C-9E6B-17B776781469">
             <File Id="EFXEXE" Name="EffectiveEx.exe" KeyPath="yes" DiskId="1" Source="..\..\EffectiveEx\bin\Release\EffectiveEx.exe">
-              <Shortcut Id="startMenuEFXEXE" Directory="ProgramMenuDir" Name="EffectiveEx" WorkingDirectory="INSTALLDIR" Icon="EffectiveEx.exe" IconIndex="0" Advertise="yes" />
-              <Shortcut Id="desktopEFXEXE" Directory="DesktopFolder" Name="EffectiveEx" WorkingDirectory="INSTALLDIR" Icon="EffectiveEx.exe" IconIndex="0" Advertise="yes" />
+              <Shortcut Id="startMenuEFXEXE" Directory="ProgramMenuDir" Name="EffectiveEx" WorkingDirectory="INSTALLDIR" Icon="EFXIcon.exe" IconIndex="0" Advertise="yes" />
+              <Shortcut Id="desktopEFXEXE" Directory="DesktopFolder" Name="EffectiveEx" WorkingDirectory="INSTALLDIR" Icon="EFXIcon.exe" IconIndex="0" Advertise="yes" />
             </File>
           </Component>
 
@@ -32,6 +32,8 @@
       <Directory Id="DesktopFolder" Name="Desktop" />
 
     </Directory>
+
+    <Icon Id="EFXIcon.exe" SourceFile="..\..\EffectiveEx\bin\Release\EffectiveEx.exe" />
     
 	</Product>
 
