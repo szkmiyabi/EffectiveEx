@@ -483,38 +483,49 @@ namespace EffectiveEx
         }
 
         //Excelワークシートをプレビュー
+        private async Task previewWorksheetWrap()
+        {
+            await Task.Run(() =>
+            {
+                _previewWorksheet __previewWorksheet = previewWorksheet;
+                this.Invoke(__previewWorksheet);
+            });
+        }
+        //DataGridFormのためのデリゲート
         private delegate void _previewWorksheet();
-
         private void previewWorksheet()
         {
-            DataTable tbl = new DataTable("worksheetPreviewTable");
-
             //共通デリゲートインスタンス
             _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
             _writeLog __writeLog = writeLog;
 
+            if ((string)this.Invoke(__sheetNameComboVal) == "")
+            {
+                MessageBox.Show("シート名が入力されていません");
+                return;
+            }
 
-            //罫線描画（処理完了まで待機）
-            tableBorderedAsync().Wait();
+            //データテーブル（DataGridFormへの引数となる）
+            DataTable tbl = new DataTable("worksheetPreviewTable");
 
             //コンボ選択値をアクティブシートにする
             initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
-
-            this.Invoke(__writeLog, "LPRフォーマット処理を開始します....");
 
             int r = getStartRow();
             int rx = getEndRow();
             int cx = getEndCol();
 
-            //headerを設定
+            //DataGridViewのヘッダーを設定
             for(int cnt = 1; cnt<=cx; cnt++)
             {
                 tbl.Columns.Add(cnt.ToString());
             }
 
+            //Worksheetを走査してDataTable組み立て
             for(int i=r; i<=rx; i++)
             {
-                List<string> cols = new List<string>();
+                //列データ配列（Listでなく配列でないとだめなので）
+                string[] cols = new string[cx];
 
                 for (int j=1; j<=cx; j++)
                 {
@@ -537,12 +548,16 @@ namespace EffectiveEx
                     {
                         cell_val = (string)cell_val;
                     }
-                    cols.Add((string)cell_val);
+                    cols[j-1] = (string)cell_val;
                 }
-                tbl.Rows.Add(cols);
 
+                //組み上がった1行分のデータをデータテーブルに追加
+                tbl.Rows.Add(cols);
             }
 
+            //DataGridFormを表示
+            data_grid_form.init(tbl, "Worksheetプレビュー");
+            data_grid_form.Show();
 
         }
 

@@ -102,5 +102,11 @@ namespace EffectiveEx
         {
             await lpReportFormat();
         }
+
+        //プレビュー
+        private async void worksheetPreviewButton_Click(object sender, EventArgs e)
+        {
+            await previewWorksheetWrap();
+        }
     }
 }
