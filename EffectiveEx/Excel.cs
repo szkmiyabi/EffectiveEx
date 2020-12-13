@@ -340,19 +340,24 @@ namespace EffectiveEx
                 _writeLog __writeLog = writeLog;
 
                 //メソッド固有デリゲートインスタンス
+                /*
                 _getStartRow __getStartRow = getStartRow;
                 _getEndRow __getEndRow = getEndRow;
                 _getStartCol __getStartCol = getStartCol;
                 _getEndCol __getEndCol = getEndCol;
+                */
 
                 //コンボ選択値をアクティブシートにする
                 this.Invoke(__initCurrentWorksheetByName, (string)this.Invoke(__sheetNameComboVal));
 
                 this.Invoke(__writeLog, "罫線描画を開始します....");
 
-                int r = (int)this.Invoke(__getStartRow);
-                int rx = (int)this.Invoke(__getEndRow);
-                int cx = (int)this.Invoke(__getEndCol);
+                int r = getStartRow();
+                //int r = (int)this.Invoke(__getStartRow);
+                int rx = getEndRow();
+                //int rx = (int)this.Invoke(__getEndRow);
+                int cx = getEndCol();
+                //int cx = (int)this.Invoke(__getEndCol);
 
                 for (int i = r; i <= rx; i++)
                 {
