@@ -3,6 +3,36 @@
 	<Product Id="EBF8A92F-BD87-42D3-9810-DA6433E5C17F" Name="EffectiveEx" Language="1041" Version="1.0.0.0" Manufacturer="JCI-TN" UpgradeCode="c9eb786e-bc29-4b13-916a-7b99256d36df">
 		<Package Id="*" Manufacturer="JCI-TN" InstallerVersion="200" Compressed="yes" />
 
+    <Media Id="1" Cabinet="Product.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLDIR" Name="EffectiveEx">
+          
+          <Component Id="Component1" Guid="66DFB5F1-1AFB-497C-9E6B-17B776781469">
+            <File Id="EFXEXE" Name="EffectiveEx.exe" KeyPath="yes" DiskId="1" Source="..\..\EffectiveEx\bin\Release\EffectiveEx.exe">
+              <Shortcut Id="startMenuEFXEXE" Directory="ProgramMenuDir" Name="EffectiveEx" WorkingDirectory="INSTALLDIR" Icon="EffectiveEx.exe" IconIndex="0" Advertise="yes" />
+              <Shortcut Id="desktopEFXEXE" Directory="DesktopFolder" Name="EffectiveEx" WorkingDirectory="INSTALLDIR" Icon="EffectiveEx.exe" IconIndex="0" Advertise="yes" />
+            </File>
+          </Component>
+          
+        </Directory>
+      </Directory>
+      
+    </Directory>
+
+    <Directory Id="ProgramMenuFolder" Name="Programs">
+      <Directory Id="ProgramMenuDir" Name="EffectiveEx">
+        <Component Id="ProgramMenuDir" Guid="68535F36-C3C6-4241-BE58-67EE8844A765">
+          <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+          <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+        </Component>
+      </Directory>
+    </Directory>
+
+    <Directory Id="DesktopFolder" Name="Desktop" />
+
     
 	</Product>
 
