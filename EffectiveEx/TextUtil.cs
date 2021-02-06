@@ -31,14 +31,14 @@ namespace EffectiveEx
         public string fetch_filename_from_datetime(string extension)
         {
             DateTime ld = DateTime.Now;
-            return ld.ToString("yyyy-MM-dd_HH-mm-ss") + "." + extension;
+            return ld.ToString("yyyyMMdd_HHmmss") + "." + extension;
         }
 
         //ファイル用時刻文字列を生成
         public string fetch_filename_logtime()
         {
             DateTime ld = DateTime.Now;
-            return ld.ToString("yyyy-MM-dd_HH-mm-ss");
+            return ld.ToString("yyyyMMdd_HHmmss");
         }
 
         //ログ出力の時刻文字列を生成

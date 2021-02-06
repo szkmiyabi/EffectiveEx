@@ -14,7 +14,6 @@ namespace EffectiveEx
     public partial class Form1 : Form
     {
         string currentWbPath;
-        string saveDirPath;
         XLWorkbook currentWb;
         IXLWorksheet currentWs;
 
@@ -33,8 +32,6 @@ namespace EffectiveEx
             currentWs = null;
 
             sheetNameCombo.Enabled = false;
-            saveDirPath = getUserHomePath() + @"\Desktop\";
-            outputDirectory.Text = saveDirPath;
 
             //静的プロパティに自身を代入
             _main_form = this;
@@ -58,12 +55,6 @@ namespace EffectiveEx
                 }
                 return _data_grid_form;
             }
-        }
-
-        //出力先参照ボタンクリック
-        private void browseOutputDirectoryButton_Click(object sender, EventArgs e)
-        {
-            setOutputPath();
         }
 
         //開くボタンクリック

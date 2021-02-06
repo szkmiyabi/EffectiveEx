@@ -224,7 +224,7 @@ namespace EffectiveEx
                 //保存の段取り
                 string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
                 string ext = Path.GetExtension(currentWbPath);
-                string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
+                string new_savepath = getCurrentFileWorkPath() + new_filename + "_行削除_" + fetch_filename_logtime() + ext;
 
                 //別名保存
                 currentWb.SaveAs(new_savepath);
@@ -472,7 +472,7 @@ namespace EffectiveEx
                 //保存の段取り
                 string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
                 string ext = Path.GetExtension(currentWbPath);
-                string new_savepath = saveDirPath + new_filename + "_out_" + fetch_filename_logtime() + ext;
+                string new_savepath = getCurrentFileWorkPath() + new_filename + "_LPR書式整形_" + fetch_filename_logtime() + ext;
 
                 //別名保存
                 currentWb.SaveAs(new_savepath);

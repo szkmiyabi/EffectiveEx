@@ -32,12 +32,15 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.openButton = new System.Windows.Forms.Button();
-            this.deleteRowButton = new System.Windows.Forms.Button();
-            this.searchValsResultButton = new System.Windows.Forms.Button();
-            this.lpReportFormatButton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.sheetNameCombo = new System.Windows.Forms.ComboBox();
+            this.worksheetPreviewButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.columnValues = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.skipRowNumbers = new System.Windows.Forms.NumericUpDown();
             this.reportText = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,22 +52,19 @@
             this.label6 = new System.Windows.Forms.Label();
             this.withoutConditionColNum = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.outputDirectory = new System.Windows.Forms.TextBox();
-            this.browseOutputDirectoryButton = new System.Windows.Forms.Button();
+            this.deleteRowButton = new System.Windows.Forms.Button();
+            this.searchValsResultButton = new System.Windows.Forms.Button();
+            this.lpReportFormatButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.reportClearButton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.columnValues = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.skipRowNumbers = new System.Windows.Forms.NumericUpDown();
             this.statusBarControl = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.worksheetPreviewButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
@@ -72,9 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.withoutConditionColNum)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).BeginInit();
             this.statusBarControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,92 +81,50 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.reportText, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.reportText, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel7, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
+            this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.25373F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.74627F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 103F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 194F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(707, 535);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 177F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(692, 485);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.Controls.Add(this.openButton);
-            this.flowLayoutPanel1.Controls.Add(this.deleteRowButton);
-            this.flowLayoutPanel1.Controls.Add(this.searchValsResultButton);
-            this.flowLayoutPanel1.Controls.Add(this.lpReportFormatButton);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(278, 3);
+            this.flowLayoutPanel1.Controls.Add(this.label2);
+            this.flowLayoutPanel1.Controls.Add(this.sheetNameCombo);
+            this.flowLayoutPanel1.Controls.Add(this.worksheetPreviewButton);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(426, 40);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(686, 52);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // openButton
             // 
             this.openButton.Location = new System.Drawing.Point(3, 3);
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(53, 36);
+            this.openButton.Size = new System.Drawing.Size(101, 25);
             this.openButton.TabIndex = 1;
             this.openButton.Text = "開く";
             this.openButton.UseVisualStyleBackColor = true;
             this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
-            // deleteRowButton
-            // 
-            this.deleteRowButton.Location = new System.Drawing.Point(62, 3);
-            this.deleteRowButton.Name = "deleteRowButton";
-            this.deleteRowButton.Size = new System.Drawing.Size(60, 36);
-            this.deleteRowButton.TabIndex = 2;
-            this.deleteRowButton.Text = "行削除";
-            this.deleteRowButton.UseVisualStyleBackColor = true;
-            this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
-            // 
-            // searchValsResultButton
-            // 
-            this.searchValsResultButton.Location = new System.Drawing.Point(128, 3);
-            this.searchValsResultButton.Name = "searchValsResultButton";
-            this.searchValsResultButton.Size = new System.Drawing.Size(108, 36);
-            this.searchValsResultButton.TabIndex = 3;
-            this.searchValsResultButton.Text = "値検索集計";
-            this.searchValsResultButton.UseVisualStyleBackColor = true;
-            this.searchValsResultButton.Click += new System.EventHandler(this.searchValsResultButton_Click);
-            // 
-            // lpReportFormatButton
-            // 
-            this.lpReportFormatButton.Location = new System.Drawing.Point(242, 3);
-            this.lpReportFormatButton.Name = "lpReportFormatButton";
-            this.lpReportFormatButton.Size = new System.Drawing.Size(158, 36);
-            this.lpReportFormatButton.TabIndex = 4;
-            this.lpReportFormatButton.Text = "LPR検査結果表整形";
-            this.lpReportFormatButton.UseVisualStyleBackColor = true;
-            this.lpReportFormatButton.Click += new System.EventHandler(this.lpReportFormatButton_Click);
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.label2);
-            this.flowLayoutPanel2.Controls.Add(this.sheetNameCombo);
-            this.flowLayoutPanel2.Controls.Add(this.worksheetPreviewButton);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 101);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(701, 47);
-            this.flowLayoutPanel2.TabIndex = 1;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 6);
+            this.label2.Location = new System.Drawing.Point(110, 6);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 15);
@@ -179,20 +134,104 @@
             // sheetNameCombo
             // 
             this.sheetNameCombo.FormattingEnabled = true;
-            this.sheetNameCombo.Location = new System.Drawing.Point(81, 6);
+            this.sheetNameCombo.Location = new System.Drawing.Point(188, 6);
             this.sheetNameCombo.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.sheetNameCombo.Name = "sheetNameCombo";
             this.sheetNameCombo.Size = new System.Drawing.Size(166, 22);
             this.sheetNameCombo.TabIndex = 3;
             // 
+            // worksheetPreviewButton
+            // 
+            this.worksheetPreviewButton.Location = new System.Drawing.Point(360, 3);
+            this.worksheetPreviewButton.Name = "worksheetPreviewButton";
+            this.worksheetPreviewButton.Size = new System.Drawing.Size(78, 25);
+            this.worksheetPreviewButton.TabIndex = 5;
+            this.worksheetPreviewButton.Text = "プレビュー";
+            this.worksheetPreviewButton.UseVisualStyleBackColor = true;
+            this.worksheetPreviewButton.Click += new System.EventHandler(this.worksheetPreviewButton_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.flowLayoutPanel7);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 105);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(686, 53);
+            this.flowLayoutPanel2.TabIndex = 1;
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.label4);
+            this.flowLayoutPanel7.Controls.Add(this.columnValues);
+            this.flowLayoutPanel7.Controls.Add(this.label5);
+            this.flowLayoutPanel7.Controls.Add(this.skipRowNumbers);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(647, 39);
+            this.flowLayoutPanel7.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 6);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(136, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "条件判定する列番号";
+            // 
+            // columnValues
+            // 
+            this.columnValues.Location = new System.Drawing.Point(145, 3);
+            this.columnValues.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.columnValues.Name = "columnValues";
+            this.columnValues.Size = new System.Drawing.Size(48, 21);
+            this.columnValues.TabIndex = 5;
+            this.columnValues.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(199, 6);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(110, 15);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "処理スキップ行数";
+            // 
+            // skipRowNumbers
+            // 
+            this.skipRowNumbers.Location = new System.Drawing.Point(315, 3);
+            this.skipRowNumbers.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.skipRowNumbers.Name = "skipRowNumbers";
+            this.skipRowNumbers.Size = new System.Drawing.Size(52, 21);
+            this.skipRowNumbers.TabIndex = 4;
+            this.skipRowNumbers.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // reportText
             // 
             this.reportText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportText.Location = new System.Drawing.Point(3, 343);
+            this.reportText.Location = new System.Drawing.Point(3, 310);
             this.reportText.Multiline = true;
             this.reportText.Name = "reportText";
             this.reportText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.reportText.Size = new System.Drawing.Size(701, 189);
+            this.reportText.Size = new System.Drawing.Size(686, 172);
             this.reportText.TabIndex = 3;
             // 
             // flowLayoutPanel3
@@ -201,9 +240,9 @@
             this.flowLayoutPanel3.Controls.Add(this.searchValues);
             this.flowLayoutPanel3.Controls.Add(this.tableLayoutPanel2);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 199);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 164);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(701, 97);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(686, 97);
             this.flowLayoutPanel3.TabIndex = 2;
             // 
             // label3
@@ -297,49 +336,52 @@
             // 
             // flowLayoutPanel4
             // 
-            this.flowLayoutPanel4.Controls.Add(this.label1);
-            this.flowLayoutPanel4.Controls.Add(this.outputDirectory);
-            this.flowLayoutPanel4.Controls.Add(this.browseOutputDirectoryButton);
-            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 54);
+            this.flowLayoutPanel4.Controls.Add(this.deleteRowButton);
+            this.flowLayoutPanel4.Controls.Add(this.searchValsResultButton);
+            this.flowLayoutPanel4.Controls.Add(this.lpReportFormatButton);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(136, 61);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(701, 41);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(553, 38);
             this.flowLayoutPanel4.TabIndex = 4;
             // 
-            // label1
+            // deleteRowButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "出力先";
+            this.deleteRowButton.Location = new System.Drawing.Point(3, 3);
+            this.deleteRowButton.Name = "deleteRowButton";
+            this.deleteRowButton.Size = new System.Drawing.Size(102, 25);
+            this.deleteRowButton.TabIndex = 2;
+            this.deleteRowButton.Text = "行削除";
+            this.deleteRowButton.UseVisualStyleBackColor = true;
+            this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
             // 
-            // outputDirectory
+            // searchValsResultButton
             // 
-            this.outputDirectory.Location = new System.Drawing.Point(61, 3);
-            this.outputDirectory.Name = "outputDirectory";
-            this.outputDirectory.Size = new System.Drawing.Size(260, 21);
-            this.outputDirectory.TabIndex = 1;
+            this.searchValsResultButton.Location = new System.Drawing.Point(111, 3);
+            this.searchValsResultButton.Name = "searchValsResultButton";
+            this.searchValsResultButton.Size = new System.Drawing.Size(108, 25);
+            this.searchValsResultButton.TabIndex = 3;
+            this.searchValsResultButton.Text = "値検索集計";
+            this.searchValsResultButton.UseVisualStyleBackColor = true;
+            this.searchValsResultButton.Click += new System.EventHandler(this.searchValsResultButton_Click);
             // 
-            // browseOutputDirectoryButton
+            // lpReportFormatButton
             // 
-            this.browseOutputDirectoryButton.Location = new System.Drawing.Point(327, 3);
-            this.browseOutputDirectoryButton.Name = "browseOutputDirectoryButton";
-            this.browseOutputDirectoryButton.Size = new System.Drawing.Size(52, 25);
-            this.browseOutputDirectoryButton.TabIndex = 2;
-            this.browseOutputDirectoryButton.Text = "参照";
-            this.browseOutputDirectoryButton.UseVisualStyleBackColor = true;
-            this.browseOutputDirectoryButton.Click += new System.EventHandler(this.browseOutputDirectoryButton_Click);
+            this.lpReportFormatButton.Location = new System.Drawing.Point(225, 3);
+            this.lpReportFormatButton.Name = "lpReportFormatButton";
+            this.lpReportFormatButton.Size = new System.Drawing.Size(100, 25);
+            this.lpReportFormatButton.TabIndex = 4;
+            this.lpReportFormatButton.Text = "LPR表整形";
+            this.lpReportFormatButton.UseVisualStyleBackColor = true;
+            this.lpReportFormatButton.Click += new System.EventHandler(this.lpReportFormatButton_Click);
             // 
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.Controls.Add(this.reportClearButton);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 302);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 267);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(262, 35);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(262, 37);
             this.flowLayoutPanel5.TabIndex = 5;
             // 
             // reportClearButton
@@ -352,79 +394,14 @@
             this.reportClearButton.UseVisualStyleBackColor = true;
             this.reportClearButton.Click += new System.EventHandler(this.reportClearButton_Click);
             // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.Controls.Add(this.label4);
-            this.flowLayoutPanel7.Controls.Add(this.columnValues);
-            this.flowLayoutPanel7.Controls.Add(this.label5);
-            this.flowLayoutPanel7.Controls.Add(this.skipRowNumbers);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 154);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(647, 39);
-            this.flowLayoutPanel7.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(136, 15);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "条件判定する列番号";
-            // 
-            // columnValues
-            // 
-            this.columnValues.Location = new System.Drawing.Point(145, 3);
-            this.columnValues.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.columnValues.Name = "columnValues";
-            this.columnValues.Size = new System.Drawing.Size(48, 21);
-            this.columnValues.TabIndex = 5;
-            this.columnValues.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(199, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 15);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "処理スキップ行数";
-            // 
-            // skipRowNumbers
-            // 
-            this.skipRowNumbers.Location = new System.Drawing.Point(315, 3);
-            this.skipRowNumbers.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.skipRowNumbers.Name = "skipRowNumbers";
-            this.skipRowNumbers.Size = new System.Drawing.Size(52, 21);
-            this.skipRowNumbers.TabIndex = 4;
-            this.skipRowNumbers.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // statusBarControl
             // 
             this.statusBarControl.ImageScalingSize = new System.Drawing.Size(17, 17);
             this.statusBarControl.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusText});
-            this.statusBarControl.Location = new System.Drawing.Point(0, 538);
+            this.statusBarControl.Location = new System.Drawing.Point(0, 489);
             this.statusBarControl.Name = "statusBarControl";
-            this.statusBarControl.Size = new System.Drawing.Size(707, 26);
+            this.statusBarControl.Size = new System.Drawing.Size(692, 26);
             this.statusBarControl.TabIndex = 1;
             this.statusBarControl.Text = "statusStrip1";
             // 
@@ -434,21 +411,11 @@
             this.statusText.Size = new System.Drawing.Size(190, 20);
             this.statusText.Text = "Excelファイルを選択してください";
             // 
-            // worksheetPreviewButton
-            // 
-            this.worksheetPreviewButton.Location = new System.Drawing.Point(253, 3);
-            this.worksheetPreviewButton.Name = "worksheetPreviewButton";
-            this.worksheetPreviewButton.Size = new System.Drawing.Size(78, 30);
-            this.worksheetPreviewButton.TabIndex = 5;
-            this.worksheetPreviewButton.Text = "プレビュー";
-            this.worksheetPreviewButton.UseVisualStyleBackColor = true;
-            this.worksheetPreviewButton.Click += new System.EventHandler(this.worksheetPreviewButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 564);
+            this.ClientSize = new System.Drawing.Size(692, 515);
             this.Controls.Add(this.statusBarControl);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -457,8 +424,12 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
+            this.flowLayoutPanel7.ResumeLayout(false);
+            this.flowLayoutPanel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -468,12 +439,7 @@
             this.flowLayoutPanel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.withoutConditionColNum)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
             this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel7.ResumeLayout(false);
-            this.flowLayoutPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).EndInit();
             this.statusBarControl.ResumeLayout(false);
             this.statusBarControl.PerformLayout();
             this.ResumeLayout(false);
@@ -497,10 +463,6 @@
         private System.Windows.Forms.TextBox searchValues;
         private System.Windows.Forms.StatusStrip statusBarControl;
         private System.Windows.Forms.ToolStripStatusLabel statusText;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox outputDirectory;
-        private System.Windows.Forms.Button browseOutputDirectoryButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button searchValsResultButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
@@ -516,6 +478,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
         private System.Windows.Forms.Button worksheetPreviewButton;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
     }
 }
 

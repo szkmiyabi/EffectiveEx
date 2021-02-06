@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,18 +31,19 @@ namespace EffectiveEx
             return path;
         }
 
-        //出力フォルダパスを選択
-        private void setOutputPath()
+        //カレントファイルのパスを取得
+        private string getCurrentFileWorkPath()
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.Description = "保存先のフォルダを選択";
-            fbd.SelectedPath = getUserHomePath() + @"\Desktop";
-            fbd.ShowNewFolderButton = true;
-            if (fbd.ShowDialog() == DialogResult.OK)
+            string retPath = "";
+            if(currentWbPath == null)
             {
-                saveDirPath = fbd.SelectedPath + @"\";
-                outputDirectory.Text = saveDirPath;
+                retPath = getUserHomePath() + @"\Desktop\";
             }
+            else
+            {
+                retPath = Path.GetDirectoryName(currentWbPath) + @"\";
+            }
+            return retPath;
         }
 
         //ユーザのホームフォルダパス取得
