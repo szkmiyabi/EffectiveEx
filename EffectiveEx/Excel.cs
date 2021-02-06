@@ -561,5 +561,62 @@ namespace EffectiveEx
 
         }
 
+        //結合セルを強調する
+        private async Task mergedCellAttention()
+        {
+            await Task.Run(() =>
+            {
+                //共通デリゲートインスタンス
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _writeLog __writeLog = writeLog;
+
+                //コンボ選択値をアクティブシートにする
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+
+                this.Invoke(__writeLog, "結合セルの強調処理を開始します....");
+
+                
+                var mc = currentWs.MergedRanges;
+                int cnt = 0;
+                foreach (IXLRange rg in mc)
+                {
+                    int rc = rg.RowCount();
+                    int cc = rg.ColumnCount();
+                    string comm = "";
+
+                    if(rc > 1 || cc > 1)
+                    {
+                        this.Invoke(__writeLog, "結合セル:" + rg.Cells().First().Address.ToString() + "を処理しています...");
+                        //rg.Style.Fill.BackgroundColor = XLColor.FromArgb(0xFDCA5F);
+                        if (rc > 1) comm += "縦に" + rc.ToString() + "行 ";
+                        if (cc > 1) comm += "横に" + cc.ToString() + "列 ";
+                        comm += "結合されています。";
+                        rg.Cells().First().Comment.AddText(comm);
+                        cnt++;
+                        
+                    }
+
+                }
+
+                if(cnt == 0)
+                {
+                    this.Invoke(__writeLog, "結合セルはありません。処理をキャンセルします。");
+                    return;
+                }
+
+                this.Invoke(__writeLog, "結合セルの強調処理が完了しました....");
+
+                //保存の段取り
+                string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+                string ext = Path.GetExtension(currentWbPath);
+                string new_savepath = getCurrentFileWorkPath() + new_filename + "_結合セル強調_" + fetch_filename_logtime() + ext;
+
+                //別名保存
+                currentWb.SaveAs(new_savepath);
+                this.Invoke(__writeLog, "処理が完了しました。出力ファイル：" + new_savepath);
+                
+            });
+        }
+
     }
 }

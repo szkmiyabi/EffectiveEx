@@ -66,7 +66,7 @@ namespace EffectiveEx
             string path = getLoadPath("xlsx");
             if (path.Equals("")) return;
             currentWbPath = path;
-            statusText.Text = path;
+            statusText.Text = @path;
             initTargetWorksheetCombo();
         }
 
@@ -100,5 +100,10 @@ namespace EffectiveEx
             await previewWorksheetWrap();
         }
 
+        //結合セル強調
+        private async void mergedCellAttentionButton_Click(object sender, EventArgs e)
+        {
+            await mergedCellAttention();
+        }
     }
 }
