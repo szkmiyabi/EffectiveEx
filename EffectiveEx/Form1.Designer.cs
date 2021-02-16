@@ -430,9 +430,9 @@
             // 
             this.ankQueryButton.Location = new System.Drawing.Point(277, 3);
             this.ankQueryButton.Name = "ankQueryButton";
-            this.ankQueryButton.Size = new System.Drawing.Size(75, 23);
+            this.ankQueryButton.Size = new System.Drawing.Size(102, 25);
             this.ankQueryButton.TabIndex = 6;
-            this.ankQueryButton.Text = "button1";
+            this.ankQueryButton.Text = "ANK抽出";
             this.ankQueryButton.UseVisualStyleBackColor = true;
             this.ankQueryButton.Click += new System.EventHandler(this.ankQueryButton_Click);
             // 

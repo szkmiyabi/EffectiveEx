@@ -108,7 +108,7 @@ namespace EffectiveEx
 
         private void ankQueryButton_Click(object sender, EventArgs e)
         {
-            getAnkResultRows();
+            getAnkResultRecordWrap();
         }
     }
 }
