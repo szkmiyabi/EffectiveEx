@@ -619,6 +619,49 @@ namespace EffectiveEx
             });
         }
 
+        //Excelファイルに出力
+        private void saveNewBookAs(List<List<string>> data, string filename)
+        {
+            _writeLog __writeLog = writeLog;
+
+            try
+            {
+                using (var wb = new ClosedXML.Excel.XLWorkbook())
+                {
+                    var ws = wb.Worksheets.Add("Sheet1");
+
+                    //行のループ
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        List<string> row = (List<string>)data[i];
+
+                        //列のループ
+                        for (int j = 0; j < row.Count; j++)
+                        {
+                            string col = (string)row[j];
+                            ws.Cell(i + 1, j + 1).Value = col;
+                            ws.Cell(i + 1, j + 1).Style.Border.TopBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.LeftBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Border.RightBorder = XLBorderStyleValues.Thin;
+                            ws.Cell(i + 1, j + 1).Style.Font.FontName = "ＭＳ Ｐゴシック";
+                            ws.Cell(i + 1, j + 1).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+
+                        }
+
+                    }
+
+                    wb.SaveAs(filename);
+                    main_form.Invoke(__writeLog, "保存に成功しました。（" + filename + "）");
+                }
+            }
+            catch (Exception ex)
+            {
+                main_form.Invoke(__writeLog, "【エラー】" + ex.Message);
+                return;
+            }
+        }
+
         //アンケートデータ自動抽出
         private async Task getAnkResultRecordWrap()
         {
@@ -626,10 +669,37 @@ namespace EffectiveEx
             {
                 _writeLog __writeLog = writeLog;
                 _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
-                //initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
 
                 List<List<string>> data = new List<List<string>>();
                 string str = "";
+                List<string> head_row = new List<string>()
+                {
+                    "社名・団体名",
+                    "Q1-1業種",
+                    "Q1-2従業員数",
+                    "Q2-1経営への影響",
+                    "Q2-2具体的な影響の内容（複数回答）",
+                    "Q3-1従業員への衛星管理（複）",
+                    "Q3-2来客者への衛生管理（複）",
+                    "Q3-3設備・屋内への消毒の実施（複）",
+                    "Q3-4換気の実施（複数回答）",
+                    "Q3-5その他",
+                    "Q4-1ウエブ会議の活用",
+                    "Q4-2テレワークの導入等",
+                    "Q4-3従業員の配置等",
+                    "Q4-4その他",
+                    "Q5-1コスト削減（複数回答）",
+                    "Q5-2外部への営業活動の強化",
+                    "Q5-3生産の設備投資の実施",
+                    "Q5-4ＩＴの設備投資の実施",
+                    "Q5-5資金調達力の強化",
+                    "Q5-6BCP（事業継続計画）の策定・見直し",
+                    "Q5-7事業を改善・工夫したこと（自由回答）",
+                    "Q6新規ビジネスの実施",
+                    "Q8取材可否"
+                };
+
+                data.Add(head_row);
 
                 foreach (var sh in currentWb.Worksheets)
                 {
@@ -638,12 +708,25 @@ namespace EffectiveEx
                     if (shName == "集計用") continue;
 
                     initCurrentWorksheet(shName);
-                    this.Invoke(__writeLog, "シート：" + shName + "からデータを抽出しています...");
+                    this.Invoke(__writeLog, "シート [ " + shName + " ] からデータを抽出しています...");
 
                     List<string> row = getAnkResultRecord();
                     data.Add(row);
                 }
 
+                this.Invoke(__writeLog, "抽出完了。抽出データの保存を開始します....");
+
+                //保存の段取り
+                string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+                string ext = Path.GetExtension(currentWbPath);
+                string new_savepath = getCurrentFileWorkPath() + "ANK抽出データ_【" + new_filename + "】_" + fetch_filename_logtime() + ext;
+
+                //保存
+                saveNewBookAs(data, new_savepath);
+
+                this.Invoke(__writeLog, "処理が完了しました。");
+
+                /*
                 foreach (var r in data)
                 {
                     foreach (string line in r)
@@ -654,6 +737,7 @@ namespace EffectiveEx
                 }
 
                 this.Invoke(__writeLog, str);
+                */
             });
 
         }
@@ -720,7 +804,15 @@ namespace EffectiveEx
             //Q3-5その他  空欄＞記載なし
             string q3x5Addr = "$F$23";
             string a3x5 = querySingleResult(q3x5Addr);
-            data.Add(a3x5);
+            if(a3x5 == "記載あり")
+            {
+                string a3x5br = querySingleResultBrowseVal(q3x5Addr);
+                data.Add(a3x5br);
+            }
+            else
+            {
+                data.Add(a3x5);
+            }
 
             //Q4-1ウエブ会議の活用
             string q4x1Addr = "$F$26:$J$27";
@@ -740,7 +832,15 @@ namespace EffectiveEx
             //Q4-4その他  空欄＞記載なし
             string q4x4Addr = "$F$33";
             string a4x4 = querySingleResult(q4x4Addr);
-            data.Add(a4x4);
+            if(a4x4 == "記載あり")
+            {
+                string a4x4br = querySingleResultBrowseVal(q4x4Addr);
+                data.Add(a4x4br);
+            }
+            else
+            {
+                data.Add(a4x4);
+            }
 
             //Q5-1コスト削減（複数回答）
             string q5x1Addr = "$E$36:$I$37";
@@ -775,7 +875,15 @@ namespace EffectiveEx
             //Q5-7事業を改善・工夫したこと（自由回答）
             string q5x7Addr = "$F$49";
             string a5x7 = querySingleResult(q5x7Addr);
-            data.Add(a5x7);
+            if(a5x7 == "記載あり")
+            {
+                string a5x7br = querySingleResultBrowseVal(q5x7Addr);
+                data.Add(a5x7br);
+            }
+            else
+            {
+                data.Add(a5x7);
+            }
 
             //Q6新規ビジネスの実施
             string q6Addr = "$F$52:$I$53";
