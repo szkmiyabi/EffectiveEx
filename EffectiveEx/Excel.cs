@@ -620,20 +620,42 @@ namespace EffectiveEx
         }
 
         //アンケートデータ自動抽出
-        private void getAnkResultRecordWrap()
+        private async Task getAnkResultRecordWrap()
         {
-            _writeLog __writeLog = writeLog;
-            _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
-
-            initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
-
-            List<string> data = getAnkResultRecord();
-            string str = "";
-            foreach(string row in data)
+            await Task.Run(() =>
             {
-                str += row + "\t";
-            }
-            this.Invoke(__writeLog, str);
+                _writeLog __writeLog = writeLog;
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                //initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+
+                List<List<string>> data = new List<List<string>>();
+                string str = "";
+
+                foreach (var sh in currentWb.Worksheets)
+                {
+                    string shName = sh.Name;
+                    if (shName == "入力方法") continue;
+                    if (shName == "集計用") continue;
+
+                    initCurrentWorksheet(shName);
+                    this.Invoke(__writeLog, "シート：" + shName + "からデータを抽出しています...");
+
+                    List<string> row = getAnkResultRecord();
+                    data.Add(row);
+                }
+
+                foreach (var r in data)
+                {
+                    foreach (string line in r)
+                    {
+                        str += line + "\t";
+                    }
+                    str += "\r\n";
+                }
+
+                this.Invoke(__writeLog, str);
+            });
+
         }
 
         //1件分のレコードデータ抽出
@@ -642,6 +664,12 @@ namespace EffectiveEx
             List<string> data = new List<string>();
 
             string body = "";
+
+            //誤字修正
+            currentWs.Range("P2").Cells().ElementAt<IXLCell>(0).Value = "サービス業";
+            currentWs.Range("H26").Cells().ElementAt<IXLCell>(0).Value = "コロナで導入";
+            currentWs.Range("H28").Cells().ElementAt<IXLCell>(0).Value = "コロナで導入";
+            currentWs.Range("G64").Cells().ElementAt<IXLCell>(0).Value = "取材を受けることは難しい";
 
             //社名・団体名
             string q0Addr = "$C$2";

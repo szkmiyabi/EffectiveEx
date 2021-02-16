@@ -106,9 +106,9 @@ namespace EffectiveEx
             await mergedCellAttention();
         }
 
-        private void ankQueryButton_Click(object sender, EventArgs e)
+        private async void ankQueryButton_Click(object sender, EventArgs e)
         {
-            getAnkResultRecordWrap();
+            await getAnkResultRecordWrap();
         }
     }
 }
