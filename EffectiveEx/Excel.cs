@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace EffectiveEx
 {
@@ -616,6 +617,132 @@ namespace EffectiveEx
                 this.Invoke(__writeLog, "処理が完了しました。出力ファイル：" + new_savepath);
                 
             });
+        }
+
+        //アンケートデータ自動抽出
+        private void getAnkResultRows()
+        {
+            _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+            initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+            loadAnkResultRow();
+
+        }
+
+        //1件分のレコードデータ抽出
+        private void loadAnkResultRow()
+        {
+            _writeLog __writeLog = writeLog;
+
+            string body = "";
+
+            //社名・団体名
+            string q0Addr = "$C$2";
+            string a0 = querySingleResult(q0Addr);
+            body += a0;
+
+            //Q1-1業種
+            string q1x1Addr = "$F$2:$R$3";
+            string a1x1 = queryMultiResult(q1x1Addr);
+            body += "\t" + a1x1;
+
+            //Q1-2従業員数
+            string q1x2Addr = "$F$4:$L$5";
+            //Q2-1経営への影響
+            string q2x1Addr = "$F$8:$K$9";
+            //Q2-2具体的な影響の内容（複数回答）
+            string q2x2Addr = "$F$10:$O$11";
+
+            //Q3-1従業員への衛星管理（複）
+            string q3x1Addr = "$F$14:$I$15";
+            string a3x1 = queryMultiResult(q3x1Addr);
+            body += "\t" + a3x1;
+
+            //Q3-2来客者への衛生管理（複）
+            string q3x2Addr = "$F$16:$J$17";
+            //Q3-3設備・屋内への消毒の実施（複）
+            string q3x3Addr = "$F$18:$I$19";
+            //Q3-4換気の実施（複数回答）
+            string q3x4Addr = "$F$20:$I$21";
+
+            //Q3-5その他  空欄＞記載なし
+            string q3x5Addr = "$F$23";
+            string a3x5 = querySingleResult(q3x5Addr);
+            body += "\t" + a3x5;
+
+            //Q4-1ウエブ会議の活用
+            string q4x1Addr = "$F$26:$J$27";
+            //Q4-2テレワークの導入等
+            string q4x2Addr = "$F$28:$J$29";
+            //Q4-3従業員の配置等
+            string q4x3Addr = "$F$30:$J$31";
+            //Q4-4その他  空欄＞記載なし
+            string q4x4Addr = "$F$33";
+            //Q5-1コスト削減（複数回答）
+            string q5x1Addr = "$E$36:$I$37";
+            //Q5-2外部への営業活動の強化
+            string q5x2Addr = "$F$38:$I$39";
+            //Q5-3生産の設備投資の実施
+            string q5x3Addr = "$F$40:$I$41";
+            //Q5-4ＩＴの設備投資の実施
+            string q5x4Addr = "$F$42:$I$43";
+            //Q5-5資金調達力の強化
+            string q5x5Addr = "$F$44:$I$45";
+            //Q5-6BCP（事業継続計画）の策定・見直し
+            string q5x6Addr = "$F$46:$I$47";
+            //Q5-7事業を改善・工夫したこと（自由回答）
+            string q5x7Addr = "$F$49";
+            //Q6新規ビジネスの実施
+            string q6Addr = "$F$52:$I$53";
+            //Q8取材可否
+            string q8Addr = "$F$64:$H$65";
+
+            this.Invoke(__writeLog,body);
+
+        }
+
+        //単独セルの結果を取得
+        private string querySingleResult(string addr)
+        {
+            string ret = "";
+            IXLRange rg = currentWs.Range(addr);
+            ret = (string)rg.Cells().ElementAt<IXLCell>(0).Value;
+            if (ret == "") ret = "記載なし";
+            return ret;
+        }
+
+        //複数セルの複数結果を取得
+        private string queryMultiResult(string addr)
+        {
+            string ret = "";
+            IXLRange rg = currentWs.Range(addr);
+            IXLCell lastCell = rg.LastCell();
+            int rx = lastCell.WorksheetRow().RowNumber();
+            int cx = lastCell.WorksheetColumn().ColumnNumber();
+
+            for (int i=6; i<= cx; i++)
+            {
+                double val = 0;
+                try
+                {
+                    val = currentWs.Cell(rx, i).GetDouble();
+                }
+                catch(Exception ex) { }
+                
+                if (val == 1)
+                {
+                    var inqval = currentWs.Cell(rx-1, i).Value;
+                    ret += (string)inqval + ",";
+                }
+            }
+
+            try
+            {
+                Regex pt = new Regex(@",$");
+                ret = pt.Replace(ret, "");
+            }
+            catch(Exception ex) { }
+
+            return ret;
         }
 
     }

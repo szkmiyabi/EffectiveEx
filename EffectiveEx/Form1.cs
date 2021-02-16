@@ -105,5 +105,10 @@ namespace EffectiveEx
         {
             await mergedCellAttention();
         }
+
+        private void ankQueryButton_Click(object sender, EventArgs e)
+        {
+            getAnkResultRows();
+        }
     }
 }

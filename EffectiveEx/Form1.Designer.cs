@@ -41,6 +41,8 @@
             this.columnValues = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.skipRowNumbers = new System.Windows.Forms.NumericUpDown();
+            this.deleteRowButton = new System.Windows.Forms.Button();
+            this.searchValsResultButton = new System.Windows.Forms.Button();
             this.reportText = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,14 +54,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.withoutConditionColNum = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.deleteRowButton = new System.Windows.Forms.Button();
-            this.searchValsResultButton = new System.Windows.Forms.Button();
             this.lpReportFormatButton = new System.Windows.Forms.Button();
+            this.mergedCellAttentionButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.reportClearButton = new System.Windows.Forms.Button();
             this.statusBarControl = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mergedCellAttentionButton = new System.Windows.Forms.Button();
+            this.ankQueryButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -227,6 +228,27 @@
             0,
             0});
             // 
+            // deleteRowButton
+            // 
+            this.deleteRowButton.Location = new System.Drawing.Point(395, 3);
+            this.deleteRowButton.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
+            this.deleteRowButton.Name = "deleteRowButton";
+            this.deleteRowButton.Size = new System.Drawing.Size(102, 25);
+            this.deleteRowButton.TabIndex = 2;
+            this.deleteRowButton.Text = "行削除";
+            this.deleteRowButton.UseVisualStyleBackColor = true;
+            this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
+            // 
+            // searchValsResultButton
+            // 
+            this.searchValsResultButton.Location = new System.Drawing.Point(503, 3);
+            this.searchValsResultButton.Name = "searchValsResultButton";
+            this.searchValsResultButton.Size = new System.Drawing.Size(108, 25);
+            this.searchValsResultButton.TabIndex = 3;
+            this.searchValsResultButton.Text = "値検索集計";
+            this.searchValsResultButton.UseVisualStyleBackColor = true;
+            this.searchValsResultButton.Click += new System.EventHandler(this.searchValsResultButton_Click);
+            // 
             // reportText
             // 
             this.reportText.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -341,32 +363,12 @@
             // 
             this.flowLayoutPanel4.Controls.Add(this.lpReportFormatButton);
             this.flowLayoutPanel4.Controls.Add(this.mergedCellAttentionButton);
+            this.flowLayoutPanel4.Controls.Add(this.ankQueryButton);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(194, 60);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(480, 39);
             this.flowLayoutPanel4.TabIndex = 4;
-            // 
-            // deleteRowButton
-            // 
-            this.deleteRowButton.Location = new System.Drawing.Point(395, 3);
-            this.deleteRowButton.Margin = new System.Windows.Forms.Padding(25, 3, 3, 3);
-            this.deleteRowButton.Name = "deleteRowButton";
-            this.deleteRowButton.Size = new System.Drawing.Size(102, 25);
-            this.deleteRowButton.TabIndex = 2;
-            this.deleteRowButton.Text = "行削除";
-            this.deleteRowButton.UseVisualStyleBackColor = true;
-            this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
-            // 
-            // searchValsResultButton
-            // 
-            this.searchValsResultButton.Location = new System.Drawing.Point(503, 3);
-            this.searchValsResultButton.Name = "searchValsResultButton";
-            this.searchValsResultButton.Size = new System.Drawing.Size(108, 25);
-            this.searchValsResultButton.TabIndex = 3;
-            this.searchValsResultButton.Text = "値検索集計";
-            this.searchValsResultButton.UseVisualStyleBackColor = true;
-            this.searchValsResultButton.Click += new System.EventHandler(this.searchValsResultButton_Click);
             // 
             // lpReportFormatButton
             // 
@@ -377,6 +379,16 @@
             this.lpReportFormatButton.Text = "LPR表整形";
             this.lpReportFormatButton.UseVisualStyleBackColor = true;
             this.lpReportFormatButton.Click += new System.EventHandler(this.lpReportFormatButton_Click);
+            // 
+            // mergedCellAttentionButton
+            // 
+            this.mergedCellAttentionButton.Location = new System.Drawing.Point(136, 3);
+            this.mergedCellAttentionButton.Name = "mergedCellAttentionButton";
+            this.mergedCellAttentionButton.Size = new System.Drawing.Size(135, 25);
+            this.mergedCellAttentionButton.TabIndex = 5;
+            this.mergedCellAttentionButton.Text = "結合セル強調";
+            this.mergedCellAttentionButton.UseVisualStyleBackColor = true;
+            this.mergedCellAttentionButton.Click += new System.EventHandler(this.mergedCellAttentionButton_Click);
             // 
             // flowLayoutPanel5
             // 
@@ -414,15 +426,15 @@
             this.statusText.Size = new System.Drawing.Size(190, 20);
             this.statusText.Text = "Excelファイルを選択してください";
             // 
-            // mergedCellAttentionButton
+            // ankQueryButton
             // 
-            this.mergedCellAttentionButton.Location = new System.Drawing.Point(136, 3);
-            this.mergedCellAttentionButton.Name = "mergedCellAttentionButton";
-            this.mergedCellAttentionButton.Size = new System.Drawing.Size(135, 25);
-            this.mergedCellAttentionButton.TabIndex = 5;
-            this.mergedCellAttentionButton.Text = "結合セル強調";
-            this.mergedCellAttentionButton.UseVisualStyleBackColor = true;
-            this.mergedCellAttentionButton.Click += new System.EventHandler(this.mergedCellAttentionButton_Click);
+            this.ankQueryButton.Location = new System.Drawing.Point(277, 3);
+            this.ankQueryButton.Name = "ankQueryButton";
+            this.ankQueryButton.Size = new System.Drawing.Size(75, 23);
+            this.ankQueryButton.TabIndex = 6;
+            this.ankQueryButton.Text = "button1";
+            this.ankQueryButton.UseVisualStyleBackColor = true;
+            this.ankQueryButton.Click += new System.EventHandler(this.ankQueryButton_Click);
             // 
             // Form1
             // 
@@ -493,6 +505,7 @@
         private System.Windows.Forms.Button worksheetPreviewButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.Button mergedCellAttentionButton;
+        private System.Windows.Forms.Button ankQueryButton;
     }
 }
 
