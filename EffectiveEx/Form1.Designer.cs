@@ -56,11 +56,12 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.lpReportFormatButton = new System.Windows.Forms.Button();
             this.mergedCellAttentionButton = new System.Windows.Forms.Button();
+            this.ankQueryButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.reportClearButton = new System.Windows.Forms.Button();
             this.statusBarControl = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ankQueryButton = new System.Windows.Forms.Button();
+            this.cvEncodePointButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -364,6 +365,7 @@
             this.flowLayoutPanel4.Controls.Add(this.lpReportFormatButton);
             this.flowLayoutPanel4.Controls.Add(this.mergedCellAttentionButton);
             this.flowLayoutPanel4.Controls.Add(this.ankQueryButton);
+            this.flowLayoutPanel4.Controls.Add(this.cvEncodePointButton);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(194, 60);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
@@ -389,6 +391,16 @@
             this.mergedCellAttentionButton.Text = "結合セル強調";
             this.mergedCellAttentionButton.UseVisualStyleBackColor = true;
             this.mergedCellAttentionButton.Click += new System.EventHandler(this.mergedCellAttentionButton_Click);
+            // 
+            // ankQueryButton
+            // 
+            this.ankQueryButton.Location = new System.Drawing.Point(277, 3);
+            this.ankQueryButton.Name = "ankQueryButton";
+            this.ankQueryButton.Size = new System.Drawing.Size(102, 25);
+            this.ankQueryButton.TabIndex = 6;
+            this.ankQueryButton.Text = "ANK抽出";
+            this.ankQueryButton.UseVisualStyleBackColor = true;
+            this.ankQueryButton.Click += new System.EventHandler(this.ankQueryButton_Click);
             // 
             // flowLayoutPanel5
             // 
@@ -426,15 +438,15 @@
             this.statusText.Size = new System.Drawing.Size(190, 20);
             this.statusText.Text = "Excelファイルを選択してください";
             // 
-            // ankQueryButton
+            // cvEncodePointButton
             // 
-            this.ankQueryButton.Location = new System.Drawing.Point(277, 3);
-            this.ankQueryButton.Name = "ankQueryButton";
-            this.ankQueryButton.Size = new System.Drawing.Size(102, 25);
-            this.ankQueryButton.TabIndex = 6;
-            this.ankQueryButton.Text = "ANK抽出";
-            this.ankQueryButton.UseVisualStyleBackColor = true;
-            this.ankQueryButton.Click += new System.EventHandler(this.ankQueryButton_Click);
+            this.cvEncodePointButton.Location = new System.Drawing.Point(385, 3);
+            this.cvEncodePointButton.Name = "cvEncodePointButton";
+            this.cvEncodePointButton.Size = new System.Drawing.Size(75, 23);
+            this.cvEncodePointButton.TabIndex = 7;
+            this.cvEncodePointButton.Text = "button1";
+            this.cvEncodePointButton.UseVisualStyleBackColor = true;
+            this.cvEncodePointButton.Click += new System.EventHandler(this.cvEncodePointButton_Click);
             // 
             // Form1
             // 
@@ -506,6 +518,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.Button mergedCellAttentionButton;
         private System.Windows.Forms.Button ankQueryButton;
+        private System.Windows.Forms.Button cvEncodePointButton;
     }
 }
 

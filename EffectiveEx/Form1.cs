@@ -110,5 +110,11 @@ namespace EffectiveEx
         {
             await getAnkResultRecordWrap();
         }
+
+        private async void cvEncodePointButton_Click(object sender, EventArgs e)
+        {
+            await cvColorWrap();
+            await cvEncodePointWrap();
+        }
     }
 }

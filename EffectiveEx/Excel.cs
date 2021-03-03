@@ -985,5 +985,174 @@ namespace EffectiveEx
             return ret;
         }
 
+        //カンマ区切りのセルデータを点数付け、無回答、記載なしは0とする
+        private async Task cvEncodePointWrap()
+        {
+            await Task.Run(() =>
+            {
+                //共通デリゲートインスタンス
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _writeLog __writeLog = writeLog;
+                _skipRowNumbersVal __skipRowNumbersVal = skipRowNumbersVal;
+                _columnValuesVal __columnValuesVal = columnValuesVal;
+
+
+                //コンボ選択値をアクティブシートにする
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
+
+                int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
+                r = r + skip_nm;
+                int icx = (int)this.Invoke(__columnValuesVal);
+
+                for (int i = r; i <= rx; i++)
+                {
+                    this.Invoke(__writeLog, i + "行目の処理....");
+                    for (int j = 1; j <= cx; j++)
+                    {
+                        if(j >= icx)
+                        {
+                            int cnt = cvEncodePoint(currentWs.Cell(i, j));
+                            currentWs.Cell(i, j).Value = cnt;
+                            if (cnt == 0) currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFFB3B3);
+
+                        }
+                    }
+                }
+
+
+                //保存の段取り
+                string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+                string ext = Path.GetExtension(currentWbPath);
+                string new_savepath = getCurrentFileWorkPath() + new_filename + "_点数化_" + fetch_filename_logtime() + ext;
+
+                //別名保存
+                currentWb.SaveAs(new_savepath);
+                this.Invoke(__writeLog, "処理が完了しました。出力ファイル：" + new_savepath);
+
+            });
+        }
+
+        //
+        private async Task cvColorWrap()
+        {
+            await Task.Run(() =>
+            {
+                //共通デリゲートインスタンス
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _writeLog __writeLog = writeLog;
+                _skipRowNumbersVal __skipRowNumbersVal = skipRowNumbersVal;
+
+                //コンボ選択値をアクティブシートにする
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
+
+                int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
+                r = r + skip_nm;
+
+                for (int i = r; i <= rx; i++)
+                {
+                    this.Invoke(__writeLog, i + "行目の処理....");
+                    for (int j = 1; j <= cx; j++)
+                    {
+                        if (j >= 5)
+                        {
+                            int cnt = cvEncodePoint(currentWs.Cell(i, j));
+                            if(cnt == 0) currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFFB3B3);
+                            //currentWs.Cell(i, j).Value = cnt;
+                        }
+                    }
+                }
+
+
+                //保存の段取り
+                //string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+                //string ext = Path.GetExtension(currentWbPath);
+                //string new_savepath = getCurrentFileWorkPath() + new_filename + "_点数化_" + fetch_filename_logtime() + ext;
+
+                //保存
+                currentWb.Save();
+                this.Invoke(__writeLog, "処理が完了しました。");
+
+            });
+        }
+
+        private int cvEncodePoint(IXLCell cl)
+        {
+            int pt = 0;
+            string vl = "";
+            try
+            {
+                vl = (string)cl.Value;
+                char[] delimit = { ',' };
+                string[] cvl = vl.Split(delimit);
+                pt = cvl.Length;
+            }
+            catch(Exception ex) { }
+
+            if(vl == "無回答" || vl == "記載なし" || vl == "" || vl == "計画なし" || vl == "変更なし")
+            {
+                pt = 0;
+            }
+            return pt;
+        }
+
+        private List<string> effectArr = new List<string>()
+        {
+            "売上げ（販売や受注）の減少",
+            "営業活動や商談の困難・延期",
+            "仕入れの困難・遅延",
+            "資金繰りに関する不安・逼迫化",
+            "勤務時間や休日の変更等",
+            "感染予防対策への手間・コスト増大",
+            "ウエブ会議導入等",
+            "採用活動の困難性",
+            "その他",
+            "無回答"
+        };
+
+        private Boolean inListVal(string str)
+        {
+            Boolean flg = false;
+            foreach(string key in effectArr)
+            {
+                if(key == str)
+                {
+                    flg = true;
+                    break;
+                }
+            }
+            return flg;
+        }
+
+        private int cvCheckPoint(IXLCell cl)
+        {
+            int pt = 0;
+            string vl = "";
+            try
+            {
+                vl = (string)cl.Value;
+                char[] delimit = { ',' };
+                string[] cvl = vl.Split(delimit);
+                for(int i=0; i<cvl.Length; i++)
+                {
+                    string row = cvl[i];
+                    if (inListVal(row))
+                    {
+                        pt = 1;
+                        return pt;
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            return pt;
+        }
+
     }
 }
