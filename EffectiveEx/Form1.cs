@@ -116,5 +116,10 @@ namespace EffectiveEx
             await cvColorWrap();
             await cvEncodePointWrap();
         }
+
+        private async void cvQueryOutputColumnButton_Click(object sender, EventArgs e)
+        {
+            await cvQueryOutputColumn();
+        }
     }
 }

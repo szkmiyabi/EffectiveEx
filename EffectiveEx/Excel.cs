@@ -1103,6 +1103,69 @@ namespace EffectiveEx
             return pt;
         }
 
+        //カンマ区切りデータセルの項目有無判定（0＝なし/1＝あり）を列展開する
+        private async Task cvQueryOutputColumn()
+        {
+            await Task.Run(() =>
+            {
+                //共通デリゲートインスタンス
+                _sheetNameComboVal __sheetNameComboVal = sheetNameComboVal;
+                _writeLog __writeLog = writeLog;
+                _skipRowNumbersVal __skipRowNumbersVal = skipRowNumbersVal;
+                _columnValuesVal __columnValuesVal = columnValuesVal;
+
+
+                //コンボ選択値をアクティブシートにする
+                initCurrentWorksheet((string)this.Invoke(__sheetNameComboVal));
+
+                int r = getStartRow();
+                int rx = getEndRow();
+                int cx = getEndCol();
+
+                int targetCol = (int)this.Invoke(__columnValuesVal);
+
+                int cz = cx + effectArr.Count;
+                int yz = 0;
+
+                for(int z=cx+1; z<=cz; z++)
+                {
+                    currentWs.Cell(1, z).Value = (string)effectArr[yz];
+                    yz++;
+                }
+
+                int skip_nm = (int)this.Invoke(__skipRowNumbersVal);
+                r = r + skip_nm;
+                int icx = (int)this.Invoke(__columnValuesVal);
+
+                for (int i = r; i <= rx; i++)
+                {
+                    this.Invoke(__writeLog, i + "行目の処理....");
+                    //string cv = (string)currentWs.Cell(i, 2).Value;
+
+                    List<int> arr = createCvCheckCountArr(currentWs.Cell(i, targetCol));
+                    int y = 0;
+
+                    for (int j =cx+1; j <= cz; j++)
+                    {
+                        currentWs.Cell(i, j).Value = arr[y];
+                        if(arr[y] == 1) currentWs.Cell(i, j).Style.Fill.BackgroundColor = XLColor.FromArgb(0xFFB3B3);
+                        y++;
+                    }
+                }
+
+                //保存の段取り
+                string new_filename = Path.GetFileNameWithoutExtension(currentWbPath);
+                string ext = Path.GetExtension(currentWbPath);
+                string new_savepath = getCurrentFileWorkPath() + new_filename + "_個別カウント_" + fetch_filename_logtime() + ext;
+
+                //別名保存
+                currentWb.SaveAs(new_savepath);
+                this.Invoke(__writeLog, "処理が完了しました。出力ファイル：" + new_savepath);
+
+            });
+
+        }
+
         private List<string> effectArr = new List<string>()
         {
             "売上げ（販売や受注）の減少",
@@ -1117,41 +1180,43 @@ namespace EffectiveEx
             "無回答"
         };
 
-        private Boolean inListVal(string str)
+        private int getHitColumnNum(string str)
         {
-            Boolean flg = false;
+            int n = 0;
             foreach(string key in effectArr)
             {
                 if(key == str)
                 {
-                    flg = true;
-                    break;
+                    return n;
                 }
+                n++;
             }
-            return flg;
+            return n;
         }
 
-        private int cvCheckPoint(IXLCell cl)
+        private List<int> createCvCheckCountArr(IXLCell cl)
         {
-            int pt = 0;
             string vl = "";
+            List<int> arr = new List<int>()
+            {
+                0,0,0,0,0,0,0,0,0,0
+            };
+
             try
             {
                 vl = (string)cl.Value;
                 char[] delimit = { ',' };
                 string[] cvl = vl.Split(delimit);
-                for(int i=0; i<cvl.Length; i++)
+                for (int i = 0; i < cvl.Length; i++)
                 {
                     string row = cvl[i];
-                    if (inListVal(row))
-                    {
-                        pt = 1;
-                        return pt;
-                    }
+                    int idx = getHitColumnNum(row);
+                    arr[idx] = 1;
                 }
             }
-            catch (Exception ex) { }
-            return pt;
+            catch(Exception ex) { }
+            return arr;
+
         }
 
     }
