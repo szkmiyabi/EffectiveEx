@@ -8,6 +8,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace EffectiveEx
 {
@@ -690,9 +691,29 @@ namespace EffectiveEx
                     continue;
                 }
             }
-
+            this.Invoke(__writeLog, "全てのブックの処理が完了しました。");
         }
 
+        //BookをPDF保存する
+        private void savePDFFromBook()
+        {
+            _writeLog __writeLog = writeLog;
+            List<string> books = getBookList();
+            foreach(string book in books)
+            {
+                main_form.Invoke(__writeLog, book + " を処理しています...");
+                string fileName = Path.GetFileName(book);
+                string fileNamePdf = fileName.Substring(0, fileName.IndexOf(".")) + ".pdf";
+                string save_filename = currentFolderDir + @"\" + fileNamePdf;
+                SaveAsPdf(book, save_filename);
+            }
+            var excels = Process.GetProcessesByName("EXCEL");
+            foreach(var x in excels)
+            {
+                x.Kill();
+            }
+            this.Invoke(__writeLog, "全てのブックの処理が完了しました。");
+        }
 
     }
 }

@@ -14,6 +14,7 @@ namespace EffectiveEx
     public partial class Form1 : Form
     {
         string currentWbPath;
+        string currentFolderDir;
         XLWorkbook currentWb;
         IXLWorksheet currentWs;
 
@@ -28,6 +29,7 @@ namespace EffectiveEx
         {
             InitializeComponent();
             currentWbPath = "";
+            currentFolderDir = "";
             currentWb = null;
             currentWs = null;
 
@@ -124,9 +126,16 @@ namespace EffectiveEx
             await cvQueryOutputColumn();
         }
 
+        //フッター消去
         private void BookFooterClearButton_Click(object sender, EventArgs e)
         {
             clearBookFootersWrap();
+        }
+
+        //PDF保存
+        private void savePDFButton_Click(object sender, EventArgs e)
+        {
+            savePDFFromBook();
         }
     }
 }

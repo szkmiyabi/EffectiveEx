@@ -35,20 +35,28 @@
             this.label2 = new System.Windows.Forms.Label();
             this.sheetNameCombo = new System.Windows.Forms.ComboBox();
             this.worksheetPreviewButton = new System.Windows.Forms.Button();
-            this.deleteRowButton = new System.Windows.Forms.Button();
-            this.searchValsResultButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.columnValues = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.skipRowNumbers = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.withoutConditionColNum = new System.Windows.Forms.NumericUpDown();
             this.reportText = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.searchValues = new System.Windows.Forms.TextBox();
             this.searchValResultWithoutCheck = new System.Windows.Forms.CheckBox();
+            this.searchValsResultButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.reportClearButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.deleteRowButton = new System.Windows.Forms.Button();
             this.lpReportFormatButton = new System.Windows.Forms.Button();
             this.mergedCellAttentionButton = new System.Windows.Forms.Button();
+            this.BookFooterClearButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.ankQueryButton = new System.Windows.Forms.Button();
@@ -56,16 +64,13 @@
             this.cvQueryOutputColumnButton = new System.Windows.Forms.Button();
             this.statusBarControl = new System.Windows.Forms.StatusStrip();
             this.statusText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.withoutConditionColNum = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.skipRowNumbers = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.columnValues = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.BookFooterClearButton = new System.Windows.Forms.Button();
+            this.savePDFButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.withoutConditionColNum)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -74,10 +79,6 @@
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel9.SuspendLayout();
             this.statusBarControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.withoutConditionColNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -120,7 +121,7 @@
             // 
             this.openButton.Location = new System.Drawing.Point(3, 3);
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(72, 25);
+            this.openButton.Size = new System.Drawing.Size(112, 25);
             this.openButton.TabIndex = 1;
             this.openButton.Text = "開く";
             this.openButton.UseVisualStyleBackColor = true;
@@ -129,7 +130,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(81, 10);
+            this.label2.Location = new System.Drawing.Point(121, 10);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 15);
@@ -139,7 +140,7 @@
             // sheetNameCombo
             // 
             this.sheetNameCombo.FormattingEnabled = true;
-            this.sheetNameCombo.Location = new System.Drawing.Point(159, 6);
+            this.sheetNameCombo.Location = new System.Drawing.Point(199, 6);
             this.sheetNameCombo.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.sheetNameCombo.Name = "sheetNameCombo";
             this.sheetNameCombo.Size = new System.Drawing.Size(166, 22);
@@ -147,7 +148,7 @@
             // 
             // worksheetPreviewButton
             // 
-            this.worksheetPreviewButton.Location = new System.Drawing.Point(331, 3);
+            this.worksheetPreviewButton.Location = new System.Drawing.Point(371, 3);
             this.worksheetPreviewButton.Name = "worksheetPreviewButton";
             this.worksheetPreviewButton.Size = new System.Drawing.Size(97, 25);
             this.worksheetPreviewButton.TabIndex = 5;
@@ -155,25 +156,100 @@
             this.worksheetPreviewButton.UseVisualStyleBackColor = true;
             this.worksheetPreviewButton.Click += new System.EventHandler(this.worksheetPreviewButton_Click);
             // 
-            // deleteRowButton
+            // flowLayoutPanel2
             // 
-            this.deleteRowButton.Location = new System.Drawing.Point(3, 3);
-            this.deleteRowButton.Name = "deleteRowButton";
-            this.deleteRowButton.Size = new System.Drawing.Size(102, 25);
-            this.deleteRowButton.TabIndex = 2;
-            this.deleteRowButton.Text = "行削除";
-            this.deleteRowButton.UseVisualStyleBackColor = true;
-            this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
+            this.flowLayoutPanel2.Controls.Add(this.label4);
+            this.flowLayoutPanel2.Controls.Add(this.columnValues);
+            this.flowLayoutPanel2.Controls.Add(this.label5);
+            this.flowLayoutPanel2.Controls.Add(this.skipRowNumbers);
+            this.flowLayoutPanel2.Controls.Add(this.label6);
+            this.flowLayoutPanel2.Controls.Add(this.withoutConditionColNum);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 181);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(602, 50);
+            this.flowLayoutPanel2.TabIndex = 1;
             // 
-            // searchValsResultButton
+            // label4
             // 
-            this.searchValsResultButton.Location = new System.Drawing.Point(424, 3);
-            this.searchValsResultButton.Name = "searchValsResultButton";
-            this.searchValsResultButton.Size = new System.Drawing.Size(108, 25);
-            this.searchValsResultButton.TabIndex = 3;
-            this.searchValsResultButton.Text = "値検索集計";
-            this.searchValsResultButton.UseVisualStyleBackColor = true;
-            this.searchValsResultButton.Click += new System.EventHandler(this.searchValsResultButton_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 6);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 15);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "条件判定列番号";
+            // 
+            // columnValues
+            // 
+            this.columnValues.Location = new System.Drawing.Point(121, 3);
+            this.columnValues.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.columnValues.Name = "columnValues";
+            this.columnValues.Size = new System.Drawing.Size(48, 21);
+            this.columnValues.TabIndex = 5;
+            this.columnValues.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(175, 6);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(110, 15);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "処理スキップ行数";
+            // 
+            // skipRowNumbers
+            // 
+            this.skipRowNumbers.Location = new System.Drawing.Point(291, 3);
+            this.skipRowNumbers.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.skipRowNumbers.Name = "skipRowNumbers";
+            this.skipRowNumbers.Size = new System.Drawing.Size(52, 21);
+            this.skipRowNumbers.TabIndex = 4;
+            this.skipRowNumbers.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(349, 6);
+            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(112, 15);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "絞込判定列番号";
+            // 
+            // withoutConditionColNum
+            // 
+            this.withoutConditionColNum.Location = new System.Drawing.Point(467, 3);
+            this.withoutConditionColNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.withoutConditionColNum.Name = "withoutConditionColNum";
+            this.withoutConditionColNum.Size = new System.Drawing.Size(52, 21);
+            this.withoutConditionColNum.TabIndex = 2;
+            this.withoutConditionColNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // reportText
             // 
@@ -227,6 +303,16 @@
             this.searchValResultWithoutCheck.Text = "検索値で絞込";
             this.searchValResultWithoutCheck.UseVisualStyleBackColor = true;
             // 
+            // searchValsResultButton
+            // 
+            this.searchValsResultButton.Location = new System.Drawing.Point(424, 3);
+            this.searchValsResultButton.Name = "searchValsResultButton";
+            this.searchValsResultButton.Size = new System.Drawing.Size(108, 25);
+            this.searchValsResultButton.TabIndex = 3;
+            this.searchValsResultButton.Text = "値検索集計";
+            this.searchValsResultButton.UseVisualStyleBackColor = true;
+            this.searchValsResultButton.Click += new System.EventHandler(this.searchValsResultButton_Click);
+            // 
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.Controls.Add(this.reportClearButton);
@@ -276,11 +362,22 @@
             this.flowLayoutPanel4.Controls.Add(this.lpReportFormatButton);
             this.flowLayoutPanel4.Controls.Add(this.mergedCellAttentionButton);
             this.flowLayoutPanel4.Controls.Add(this.BookFooterClearButton);
+            this.flowLayoutPanel4.Controls.Add(this.savePDFButton);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(572, 68);
             this.flowLayoutPanel4.TabIndex = 0;
+            // 
+            // deleteRowButton
+            // 
+            this.deleteRowButton.Location = new System.Drawing.Point(3, 3);
+            this.deleteRowButton.Name = "deleteRowButton";
+            this.deleteRowButton.Size = new System.Drawing.Size(102, 25);
+            this.deleteRowButton.TabIndex = 2;
+            this.deleteRowButton.Text = "行削除";
+            this.deleteRowButton.UseVisualStyleBackColor = true;
+            this.deleteRowButton.Click += new System.EventHandler(this.deleteRowButton_Click);
             // 
             // lpReportFormatButton
             // 
@@ -302,6 +399,16 @@
             this.mergedCellAttentionButton.UseVisualStyleBackColor = true;
             this.mergedCellAttentionButton.Click += new System.EventHandler(this.mergedCellAttentionButton_Click);
             // 
+            // BookFooterClearButton
+            // 
+            this.BookFooterClearButton.Location = new System.Drawing.Point(333, 3);
+            this.BookFooterClearButton.Name = "BookFooterClearButton";
+            this.BookFooterClearButton.Size = new System.Drawing.Size(100, 25);
+            this.BookFooterClearButton.TabIndex = 6;
+            this.BookFooterClearButton.Text = "フッター消去";
+            this.BookFooterClearButton.UseVisualStyleBackColor = true;
+            this.BookFooterClearButton.Click += new System.EventHandler(this.BookFooterClearButton_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -309,7 +416,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(649, 76);
+            this.tabPage2.Size = new System.Drawing.Size(580, 76);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "SUB";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -322,7 +429,7 @@
             this.flowLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(641, 68);
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(572, 68);
             this.flowLayoutPanel9.TabIndex = 0;
             // 
             // ankQueryButton
@@ -372,110 +479,15 @@
             this.statusText.Size = new System.Drawing.Size(190, 20);
             this.statusText.Text = "Excelファイルを選択してください";
             // 
-            // withoutConditionColNum
+            // savePDFButton
             // 
-            this.withoutConditionColNum.Location = new System.Drawing.Point(467, 3);
-            this.withoutConditionColNum.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.withoutConditionColNum.Name = "withoutConditionColNum";
-            this.withoutConditionColNum.Size = new System.Drawing.Size(52, 21);
-            this.withoutConditionColNum.TabIndex = 2;
-            this.withoutConditionColNum.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(349, 6);
-            this.label6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(112, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "絞込判定列番号";
-            // 
-            // skipRowNumbers
-            // 
-            this.skipRowNumbers.Location = new System.Drawing.Point(291, 3);
-            this.skipRowNumbers.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.skipRowNumbers.Name = "skipRowNumbers";
-            this.skipRowNumbers.Size = new System.Drawing.Size(52, 21);
-            this.skipRowNumbers.TabIndex = 4;
-            this.skipRowNumbers.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(175, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 15);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "処理スキップ行数";
-            // 
-            // columnValues
-            // 
-            this.columnValues.Location = new System.Drawing.Point(121, 3);
-            this.columnValues.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.columnValues.Name = "columnValues";
-            this.columnValues.Size = new System.Drawing.Size(48, 21);
-            this.columnValues.TabIndex = 5;
-            this.columnValues.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(112, 15);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "条件判定列番号";
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.label4);
-            this.flowLayoutPanel2.Controls.Add(this.columnValues);
-            this.flowLayoutPanel2.Controls.Add(this.label5);
-            this.flowLayoutPanel2.Controls.Add(this.skipRowNumbers);
-            this.flowLayoutPanel2.Controls.Add(this.label6);
-            this.flowLayoutPanel2.Controls.Add(this.withoutConditionColNum);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 181);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(602, 50);
-            this.flowLayoutPanel2.TabIndex = 1;
-            // 
-            // BookFooterClearButton
-            // 
-            this.BookFooterClearButton.Location = new System.Drawing.Point(333, 3);
-            this.BookFooterClearButton.Name = "BookFooterClearButton";
-            this.BookFooterClearButton.Size = new System.Drawing.Size(100, 23);
-            this.BookFooterClearButton.TabIndex = 6;
-            this.BookFooterClearButton.Text = "フッター消去";
-            this.BookFooterClearButton.UseVisualStyleBackColor = true;
-            this.BookFooterClearButton.Click += new System.EventHandler(this.BookFooterClearButton_Click);
+            this.savePDFButton.Location = new System.Drawing.Point(439, 3);
+            this.savePDFButton.Name = "savePDFButton";
+            this.savePDFButton.Size = new System.Drawing.Size(102, 25);
+            this.savePDFButton.TabIndex = 7;
+            this.savePDFButton.Text = "PDF保存";
+            this.savePDFButton.UseVisualStyleBackColor = true;
+            this.savePDFButton.Click += new System.EventHandler(this.savePDFButton_Click);
             // 
             // Form1
             // 
@@ -491,6 +503,11 @@
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.withoutConditionColNum)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             this.flowLayoutPanel5.ResumeLayout(false);
@@ -501,11 +518,6 @@
             this.flowLayoutPanel9.ResumeLayout(false);
             this.statusBarControl.ResumeLayout(false);
             this.statusBarControl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.withoutConditionColNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.skipRowNumbers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.columnValues)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -548,6 +560,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown withoutConditionColNum;
         private System.Windows.Forms.Button BookFooterClearButton;
+        private System.Windows.Forms.Button savePDFButton;
     }
 }
 
