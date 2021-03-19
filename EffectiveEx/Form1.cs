@@ -106,20 +106,23 @@ namespace EffectiveEx
             await mergedCellAttention();
         }
 
+        //アンケートテンプレートからレコードデータを集出
         private async void ankQueryButton_Click(object sender, EventArgs e)
         {
             await getAnkResultRecordWrap();
         }
 
+        //点数をポイント化する
         private async void cvEncodePointButton_Click(object sender, EventArgs e)
         {
-            await cvColorWrap();
             await cvEncodePointWrap();
         }
 
+        //ポイント総計を横のセルに出力する
         private async void cvQueryOutputColumnButton_Click(object sender, EventArgs e)
         {
             await cvQueryOutputColumn();
         }
+
     }
 }
