@@ -124,5 +124,9 @@ namespace EffectiveEx
             await cvQueryOutputColumn();
         }
 
+        private void BookFooterClearButton_Click(object sender, EventArgs e)
+        {
+            clearBookFootersWrap();
+        }
     }
 }

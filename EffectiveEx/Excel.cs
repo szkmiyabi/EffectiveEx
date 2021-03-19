@@ -662,5 +662,37 @@ namespace EffectiveEx
             }
         }
 
+        //Bookのフッターをクリアする
+        private void clearBookFootersWrap()
+        {
+            List<string> books = getBookList();
+            _writeLog __writeLog = writeLog;
+
+            //Bookのループ
+            foreach (string book in books)
+            {
+                try
+                {
+                    XLWorkbook cbk = new XLWorkbook(book);
+                    main_form.Invoke(__writeLog, book + " を処理しています...");
+                    foreach (var sh in cbk.Worksheets)
+                    {
+                        this.Invoke(__writeLog, "シート [ " + sh.Name + " ] の処理をしています...");
+                        sh.PageSetup.Footer.Left.Clear();
+                        sh.PageSetup.Footer.Center.Clear();
+                        sh.PageSetup.Footer.Right.Clear();
+                    }
+                    cbk.Save();
+                }
+                catch (Exception ex)
+                {
+                    this.Invoke(__writeLog, "【エラー】"+ book + " の処理をスキップします。");
+                    continue;
+                }
+            }
+
+        }
+
+
     }
 }
