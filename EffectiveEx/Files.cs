@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 
+
 namespace EffectiveEx
 {
     partial class Form1
@@ -84,6 +85,75 @@ namespace EffectiveEx
             return arr;
         }
 
+        //Excelブックのフッターをクリア
+        public void FooterClear (string excelFilePathName)
+        {
+            _writeLog __writeLog = writeLog;
+            Microsoft.Office.Interop.Excel.Application application = null;
+            Workbooks workbooks = null;
+            Microsoft.Office.Interop.Excel.Workbook workbook = null;
+            try
+            {
+                //Applicationクラスのインスタンス作成
+                application = new Microsoft.Office.Interop.Excel.Application();
+                workbooks = application.Workbooks;
+
+                //Excelファイルを開く
+                workbook = workbooks.Open(
+                    excelFilePathName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
+                    , Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+                main_form.Invoke(__writeLog, "フッター除去処理開始...");
+                for(int i=0; i<workbook.Sheets.Count; i++)
+                {
+                    var ws = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[i + 1];
+                    ws.PageSetup.LeftFooter = "";
+                    ws.PageSetup.CenterFooter = "";
+                    ws.PageSetup.RightFooter = "";
+                }
+
+
+                main_form.Invoke(__writeLog, "フッター除去処理終了...");
+                workbook.Save();
+            }
+            catch
+            {
+                var excels = Process.GetProcessesByName("EXCEL");
+                foreach (var x in excels)
+                {
+                    x.Kill();
+                }
+            }
+            finally
+            {
+                if (workbook != null)
+                {
+                    try
+                    {
+                        //workbookをClose
+                        workbook.Close(true, Type.Missing, Type.Missing);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                if (application != null)
+                {
+                    try
+                    {
+                        //applicationをClose
+                        application.Quit();
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                EffectiveEx.ComRelease.FinalReleaseComObjects(workbook, workbooks, application);
+            }
+        }
+
         //ExcelブックをPDF保存
         public void SaveAsPdf(string excelFilePathName, string saveAsPathName)
         {
@@ -102,7 +172,7 @@ namespace EffectiveEx
                     excelFilePathName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                     , Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
-                main_form.Invoke(__writeLog, "PDF出力開始----------");
+                main_form.Invoke(__writeLog, "PDF出力開始...");
 
                 //Excelのシート全てをPDFとして出力
                 if (!(System.IO.File.Exists(saveAsPathName)))
@@ -121,7 +191,7 @@ namespace EffectiveEx
                 {
                     main_form.Invoke(__writeLog, "すでに存在するファイルなので出力を中止します。");
                 }
-                main_form.Invoke(__writeLog, "PDF出力終了----------");
+                main_form.Invoke(__writeLog, "PDF出力終了...");
             }
             catch
             {

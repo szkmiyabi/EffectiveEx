@@ -666,32 +666,19 @@ namespace EffectiveEx
         //Bookのフッターをクリアする
         private void clearBookFootersWrap()
         {
-            List<string> books = getBookList();
             _writeLog __writeLog = writeLog;
-
-            //Bookのループ
+            List<string> books = getBookList();
             foreach (string book in books)
             {
-                try
-                {
-                    XLWorkbook cbk = new XLWorkbook(book);
-                    main_form.Invoke(__writeLog, book + " を処理しています...");
-                    foreach (var sh in cbk.Worksheets)
-                    {
-                        this.Invoke(__writeLog, "シート [ " + sh.Name + " ] の処理をしています...");
-                        sh.PageSetup.Footer.Left.Clear();
-                        sh.PageSetup.Footer.Center.Clear();
-                        sh.PageSetup.Footer.Right.Clear();
-                    }
-                    cbk.Save();
-                }
-                catch (Exception ex)
-                {
-                    this.Invoke(__writeLog, "【エラー】"+ book + " の処理をスキップします。");
-                    continue;
-                }
+                main_form.Invoke(__writeLog, book + " を処理しています...");
+                FooterClear(book);
             }
-            this.Invoke(__writeLog, "全てのブックの処理が完了しました。");
+            var excels = Process.GetProcessesByName("EXCEL");
+            foreach (var x in excels)
+            {
+                x.Kill();
+            }
+            this.Invoke(__writeLog, "処理が完了しました");
         }
 
         //BookをPDF保存する
@@ -712,7 +699,7 @@ namespace EffectiveEx
             {
                 x.Kill();
             }
-            this.Invoke(__writeLog, "全てのブックの処理が完了しました。");
+            this.Invoke(__writeLog, "処理が完了しました");
         }
 
     }
